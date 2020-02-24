@@ -1,5 +1,12 @@
 package org.matsim.vsp.streetCleaning.prepare;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.matsim.api.core.v01.network.Link;
 import org.matsim.api.core.v01.network.Network;
 import org.matsim.core.network.NetworkUtils;
@@ -22,7 +29,7 @@ public class AnalyzeDemand {
 		int demandRKL_B_depot1 = 0;
 		int demandRKL_C_depot1 = 0;
 		int demandRKL_P_depot1 = 0;
-		
+
 		int demandRKL_A1a_depot2 = 0;
 		int demandRKL_A1b_depot2 = 0;
 		int demandRKL_A2a_depot2 = 0;
@@ -32,7 +39,7 @@ public class AnalyzeDemand {
 		int demandRKL_B_depot2 = 0;
 		int demandRKL_C_depot2 = 0;
 		int demandRKL_P_depot2 = 0;
-		
+
 		int demandRKL_A1a_depot3 = 0;
 		int demandRKL_A1b_depot3 = 0;
 		int demandRKL_A2a_depot3 = 0;
@@ -42,7 +49,7 @@ public class AnalyzeDemand {
 		int demandRKL_B_depot3 = 0;
 		int demandRKL_C_depot3 = 0;
 		int demandRKL_P_depot3 = 0;
-		
+
 		int demandRKL_A1a_depot4 = 0;
 		int demandRKL_A1b_depot4 = 0;
 		int demandRKL_A2a_depot4 = 0;
@@ -52,7 +59,7 @@ public class AnalyzeDemand {
 		int demandRKL_B_depot4 = 0;
 		int demandRKL_C_depot4 = 0;
 		int demandRKL_P_depot4 = 0;
-		
+
 		int demandRKL_A1a_depot5 = 0;
 		int demandRKL_A1b_depot5 = 0;
 		int demandRKL_A2a_depot5 = 0;
@@ -67,28 +74,30 @@ public class AnalyzeDemand {
 			if (link.getAttributes().getAsMap().containsKey("RKL")) {
 				if (link.getAttributes().getAttribute("vehicleDepot").equals("R1")) {
 
-				if (link.getAttributes().getAttribute("RKL").equals("A1a"))
-					demandRKL_A1a_depot1++;
-				else if (link.getAttributes().getAttribute("RKL").equals("A1b"))
-					demandRKL_A1b_depot1++;
-				else if (link.getAttributes().getAttribute("RKL").equals("A2a"))
-					demandRKL_A2a_depot1++;
-				else if (link.getAttributes().getAttribute("RKL").equals("A2b"))
-					demandRKL_A2b_depot1++;
-				else if (link.getAttributes().getAttribute("RKL").equals("A3"))
-					demandRKL_A3_depot1++;
-				else if (link.getAttributes().getAttribute("RKL").equals("A4"))
-					demandRKL_A4_depot1++;
-				else if (link.getAttributes().getAttribute("RKL").equals("B"))
-					demandRKL_B_depot1++;
-				else if (link.getAttributes().getAttribute("RKL").equals("C"))
-					demandRKL_C_depot1++;
-				else if (link.getAttributes().getAttribute("RKL").equals("P"))
-					demandRKL_P_depot1++;
-			}}
+					if (link.getAttributes().getAttribute("RKL").equals("A1a"))
+						demandRKL_A1a_depot1++;
+					else if (link.getAttributes().getAttribute("RKL").equals("A1b"))
+						demandRKL_A1b_depot1++;
+					else if (link.getAttributes().getAttribute("RKL").equals("A2a"))
+						demandRKL_A2a_depot1++;
+					else if (link.getAttributes().getAttribute("RKL").equals("A2b"))
+						demandRKL_A2b_depot1++;
+					else if (link.getAttributes().getAttribute("RKL").equals("A3"))
+						demandRKL_A3_depot1++;
+					else if (link.getAttributes().getAttribute("RKL").equals("A4"))
+						demandRKL_A4_depot1++;
+					else if (link.getAttributes().getAttribute("RKL").equals("B"))
+						demandRKL_B_depot1++;
+					else if (link.getAttributes().getAttribute("RKL").equals("C"))
+						demandRKL_C_depot1++;
+					else if (link.getAttributes().getAttribute("RKL").equals("P"))
+						demandRKL_P_depot1++;
+				}
+			}
 		}
-		int assignedInput_depot1 = demandRKL_A1a_depot1 + demandRKL_A1b_depot1 + demandRKL_A2a_depot1 + demandRKL_A2b_depot1 + demandRKL_A3_depot1 + demandRKL_A4_depot1
-				+ demandRKL_B_depot1 + demandRKL_C_depot1 + demandRKL_P_depot1;
+		int assignedInput_depot1 = demandRKL_A1a_depot1 + demandRKL_A1b_depot1 + demandRKL_A2a_depot1
+				+ demandRKL_A2b_depot1 + demandRKL_A3_depot1 + demandRKL_A4_depot1 + demandRKL_B_depot1
+				+ demandRKL_C_depot1 + demandRKL_P_depot1;
 		System.out.println("Zugeordneter Input: " + assignedInput_depot1);
 		System.out.println("Gelesenen Input A1a: " + demandRKL_A1a_depot1);
 		System.out.println("Gelesenen Input A1b: " + demandRKL_A1b_depot1);
@@ -99,6 +108,21 @@ public class AnalyzeDemand {
 		System.out.println("Gelesenen Input B: " + demandRKL_B_depot1);
 		System.out.println("Gelesenen Input C: " + demandRKL_C_depot1);
 		System.out.println("Gelesenen Input P: " + demandRKL_P_depot1);
+
+		try {
+			BufferedWriter writer;
+			File file;
+			file = new File("scenarios/StreetCleaning/analyzeOfDemand.txt");
+			writer = new BufferedWriter(new FileWriter(file, true));
+			String now = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date());
+			writer.write("Analyse erstellt am: " + now + "\n\n");
+			
+			
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 }

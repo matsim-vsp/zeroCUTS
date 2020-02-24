@@ -31,7 +31,7 @@ public class ConnectNetworkWithStreetCleaningInformation {
 	private static final String berlin = "https://svn.vsp.tu-berlin.de/repos/public-svn/matsim/scenarios/countries/de/berlin/berlin-v5.4-1pct/output-berlin-v5.4-1pct/berlin-v5.4-1pct.output_network.xml.gz";
 	private static final String cleaningDemandInputShape = "C:\\Users\\Ricardo\\OneDrive\\Dokumente\\Arbeit\\VSP\\zeroCUTs\\Straßenreinigung\\Shape Reinigungsklassen/Reinigungsklassen.shp";
 	// source:
-	// https://daten.berlin.de/datensaetze/bsr-strassenreinigung-verzeichnisse-und-reinigungsklassen
+	// https://daten.berlin.de/datensaetze/bsr-straßenreinigung-verzeichnisse-und-reinigungsklassen
 	private static final String areaOfBerlin = "scenarios/avscenario/shp/berlin.shp";
 
 	public static void main(String[] args) {
@@ -51,7 +51,7 @@ public class ConnectNetworkWithStreetCleaningInformation {
 				.getDefaultGeometry();
 
 		// read all link information and convert the coordinates into the correct
-		// coordinate system and create a map with key Coord
+		// coordinate system and create a map with key coordinate
 		HashMap<Coord, SimpleFeature> featureMap = new HashMap<Coord, SimpleFeature>();
 		for (SimpleFeature singleDemand : cleaningInput) {
 			if (singleDemand.getAttribute("RVZRKL").toString().isBlank() == false
