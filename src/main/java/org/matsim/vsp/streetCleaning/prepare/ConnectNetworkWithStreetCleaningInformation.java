@@ -24,18 +24,18 @@ import org.opengis.feature.simple.SimpleFeature;
  * @author rewert
  */
 
-public class ConnectNetworkwithStreetCleaningInformation {
+public class ConnectNetworkWithStreetCleaningInformation {
 
-	static final Logger log = Logger.getLogger(ConnectNetworkwithStreetCleaningInformation.class);
+	static final Logger log = Logger.getLogger(ConnectNetworkWithStreetCleaningInformation.class);
 
 	private static final String berlin = "https://svn.vsp.tu-berlin.de/repos/public-svn/matsim/scenarios/countries/de/berlin/berlin-v5.4-1pct/output-berlin-v5.4-1pct/berlin-v5.4-1pct.output_network.xml.gz";
 	private static final String cleaningDemandInputShape = "C:\\Users\\Ricardo\\OneDrive\\Dokumente\\Arbeit\\VSP\\zeroCUTs\\Straßenreinigung\\Shape Reinigungsklassen/Reinigungsklassen.shp";
 	// source:
-	// https://daten.berlin.de/datensaetze/bsr-straßenreinigung-verzeichnisse-und-reinigungsklassen
+	// https://daten.berlin.de/datensaetze/bsr-strassenreinigung-verzeichnisse-und-reinigungsklassen
 	private static final String areaOfBerlin = "scenarios/avscenario/shp/berlin.shp";
 
 	public static void main(String[] args) {
-		//TODO perheps no use of RKL P
+		// TODO perheps no use of RKL P
 
 		log.setLevel(Level.INFO);
 
@@ -54,7 +54,8 @@ public class ConnectNetworkwithStreetCleaningInformation {
 		// coordinate system and create a map with key Coord
 		HashMap<Coord, SimpleFeature> featureMap = new HashMap<Coord, SimpleFeature>();
 		for (SimpleFeature singleDemand : cleaningInput) {
-			if (singleDemand.getAttribute("RVZRKL").toString().isBlank() == false && singleDemand.getAttribute("RVRKL") != "P") {
+			if (singleDemand.getAttribute("RVZRKL").toString().isBlank() == false
+					&& singleDemand.getAttribute("RVRKL").equals("P") == false) {
 				MultiLineString weg = (MultiLineString) singleDemand.getDefaultGeometry();
 				LineString wegeteil = (LineString) weg.getGeometryN(0);
 
