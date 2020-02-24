@@ -29,6 +29,15 @@ public class AnalyzeDemand {
 		int demandRKL_B_depot1 = 0;
 		int demandRKL_C_depot1 = 0;
 		int demandRKL_P_depot1 = 0;
+		double distanceRKL_A1a_depot1 = 0;
+		double distanceRKL_A1b_depot1 = 0;
+		double distanceRKL_A2a_depot1 = 0;
+		double distanceRKL_A2b_depot1 = 0;
+		double distanceRKL_A3_depot1 = 0;
+		double distanceRKL_A4_depot1 = 0;
+		double distanceRKL_B_depot1 = 0;
+		double distanceRKL_C_depot1 = 0;
+		double distanceRKL_P_depot1 = 0;
 
 		int demandRKL_A1a_depot2 = 0;
 		int demandRKL_A1b_depot2 = 0;
@@ -39,6 +48,16 @@ public class AnalyzeDemand {
 		int demandRKL_B_depot2 = 0;
 		int demandRKL_C_depot2 = 0;
 		int demandRKL_P_depot2 = 0;
+		
+		double distanceRKL_A1a_depot2 = 0;
+		double distanceRKL_A1b_depot2 = 0;
+		double distanceRKL_A2a_depot2 = 0;
+		double distanceRKL_A2b_depot2 = 0;
+		double distanceRKL_A3_depot2 = 0;
+		double distanceRKL_A4_depot2 = 0;
+		double distanceRKL_B_depot2 = 0;
+		double distanceRKL_C_depot2 = 0;
+		double distanceRKL_P_depot2 = 0;
 
 		int demandRKL_A1a_depot3 = 0;
 		int demandRKL_A1b_depot3 = 0;
@@ -49,6 +68,16 @@ public class AnalyzeDemand {
 		int demandRKL_B_depot3 = 0;
 		int demandRKL_C_depot3 = 0;
 		int demandRKL_P_depot3 = 0;
+		
+		double distanceRKL_A1a_depot3 = 0;
+		double distanceRKL_A1b_depot3 = 0;
+		double distanceRKL_A2a_depot3 = 0;
+		double distanceRKL_A2b_depot3 = 0;
+		double distanceRKL_A3_depot3 = 0;
+		double distanceRKL_A4_depot3 = 0;
+		double distanceRKL_B_depot3 = 0;
+		double distanceRKL_C_depot3 = 0;
+		double distanceRKL_P_depot3 = 0;
 
 		int demandRKL_A1a_depot4 = 0;
 		int demandRKL_A1b_depot4 = 0;
@@ -59,6 +88,16 @@ public class AnalyzeDemand {
 		int demandRKL_B_depot4 = 0;
 		int demandRKL_C_depot4 = 0;
 		int demandRKL_P_depot4 = 0;
+		
+		double distanceRKL_A1a_depot4 = 0;
+		double distanceRKL_A1b_depot4 = 0;
+		double distanceRKL_A2a_depot4 = 0;
+		double distanceRKL_A2b_depot4 = 0;
+		double distanceRKL_A3_depot4 = 0;
+		double distanceRKL_A4_depot4 = 0;
+		double distanceRKL_B_depot4 = 0;
+		double distanceRKL_C_depot4 = 0;
+		double distanceRKL_P_depot4 = 0;
 
 		int demandRKL_A1a_depot5 = 0;
 		int demandRKL_A1b_depot5 = 0;
@@ -69,46 +108,176 @@ public class AnalyzeDemand {
 		int demandRKL_B_depot5 = 0;
 		int demandRKL_C_depot5 = 0;
 		int demandRKL_P_depot5 = 0;
+		
+		double distanceRKL_A1a_depot5 = 0;
+		double distanceRKL_A1b_depot5 = 0;
+		double distanceRKL_A2a_depot5 = 0;
+		double distanceRKL_A2b_depot5 = 0;
+		double distanceRKL_A3_depot5 = 0;
+		double distanceRKL_A4_depot5 = 0;
+		double distanceRKL_B_depot5 = 0;
+		double distanceRKL_C_depot5 = 0;
+		double distanceRKL_P_depot5 = 0;
 
 		for (Link link : network.getLinks().values()) {
 			if (link.getAttributes().getAsMap().containsKey("RKL")) {
 				if (link.getAttributes().getAttribute("vehicleDepot").equals("R1")) {
 
-					if (link.getAttributes().getAttribute("RKL").equals("A1a"))
+					if (link.getAttributes().getAttribute("RKL").equals("A1a")) {
 						demandRKL_A1a_depot1++;
-					else if (link.getAttributes().getAttribute("RKL").equals("A1b"))
+						distanceRKL_A1a_depot1 = distanceRKL_A1a_depot1 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A1b")) {
 						demandRKL_A1b_depot1++;
-					else if (link.getAttributes().getAttribute("RKL").equals("A2a"))
+						distanceRKL_A1b_depot1 = distanceRKL_A1b_depot1 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A2a")) {
 						demandRKL_A2a_depot1++;
-					else if (link.getAttributes().getAttribute("RKL").equals("A2b"))
+						distanceRKL_A2a_depot1 = distanceRKL_A2a_depot1 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A2b")) {
 						demandRKL_A2b_depot1++;
-					else if (link.getAttributes().getAttribute("RKL").equals("A3"))
+						distanceRKL_A2b_depot1 = distanceRKL_A2b_depot1 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A3")) {
 						demandRKL_A3_depot1++;
-					else if (link.getAttributes().getAttribute("RKL").equals("A4"))
+						distanceRKL_A3_depot1 = distanceRKL_A3_depot1 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A4")) {
 						demandRKL_A4_depot1++;
-					else if (link.getAttributes().getAttribute("RKL").equals("B"))
+						distanceRKL_A4_depot1 = distanceRKL_A4_depot1 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("B")) {
 						demandRKL_B_depot1++;
-					else if (link.getAttributes().getAttribute("RKL").equals("C"))
+						distanceRKL_B_depot1 = distanceRKL_B_depot1 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("C")) {
 						demandRKL_C_depot1++;
-					else if (link.getAttributes().getAttribute("RKL").equals("P"))
+						distanceRKL_C_depot1 = distanceRKL_C_depot1 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("P")) {
 						demandRKL_P_depot1++;
+						distanceRKL_P_depot1 = distanceRKL_P_depot1 + link.getLength();
+					}
+				}
+				if (link.getAttributes().getAttribute("vehicleDepot").equals("R2")) {
+
+					if (link.getAttributes().getAttribute("RKL").equals("A1a")) {
+						demandRKL_A1a_depot2++;
+						distanceRKL_A1a_depot2 = distanceRKL_A1a_depot2 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A1b")) {
+						demandRKL_A1b_depot2++;
+						distanceRKL_A1b_depot2 = distanceRKL_A1b_depot2 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A2a")) {
+						demandRKL_A2a_depot2++;
+						distanceRKL_A2a_depot2 = distanceRKL_A2a_depot2 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A2b")) {
+						demandRKL_A2b_depot2++;
+						distanceRKL_A2b_depot2 = distanceRKL_A2b_depot2 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A3")) {
+						demandRKL_A3_depot2++;
+						distanceRKL_A3_depot2 = distanceRKL_A3_depot2 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A4")) {
+						demandRKL_A4_depot2++;
+						distanceRKL_A4_depot2 = distanceRKL_A4_depot2 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("B")) {
+						demandRKL_B_depot2++;
+						distanceRKL_B_depot2 = distanceRKL_B_depot2 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("C")) {
+						demandRKL_C_depot2++;
+						distanceRKL_C_depot2 = distanceRKL_C_depot2 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("P")) {
+						demandRKL_P_depot2++;
+						distanceRKL_P_depot2 = distanceRKL_P_depot2 + link.getLength();
+					}
+				}
+				if (link.getAttributes().getAttribute("vehicleDepot").equals("R3")) {
+
+					if (link.getAttributes().getAttribute("RKL").equals("A1a")) {
+						demandRKL_A1a_depot3++;
+						distanceRKL_A1a_depot3 = distanceRKL_A1a_depot3 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A1b")) {
+						demandRKL_A1b_depot3++;
+						distanceRKL_A1b_depot3 = distanceRKL_A1b_depot3 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A2a")) {
+						demandRKL_A2a_depot3++;
+						distanceRKL_A2a_depot3 = distanceRKL_A2a_depot3 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A2b")) {
+						demandRKL_A2b_depot3++;
+						distanceRKL_A2b_depot3 = distanceRKL_A2b_depot3 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A3")) {
+						demandRKL_A3_depot3++;
+						distanceRKL_A3_depot3 = distanceRKL_A3_depot3 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A4")) {
+						demandRKL_A4_depot3++;
+						distanceRKL_A4_depot3 = distanceRKL_A4_depot3 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("B")) {
+						demandRKL_B_depot3++;
+						distanceRKL_B_depot3 = distanceRKL_B_depot3 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("C")) {
+						demandRKL_C_depot3++;
+						distanceRKL_C_depot3 = distanceRKL_C_depot3 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("P")) {
+						demandRKL_P_depot3++;
+						distanceRKL_P_depot3 = distanceRKL_P_depot3 + link.getLength();
+					}
+				}
+				if (link.getAttributes().getAttribute("vehicleDepot").equals("R4")) {
+
+					if (link.getAttributes().getAttribute("RKL").equals("A1a")) {
+						demandRKL_A1a_depot4++;
+						distanceRKL_A1a_depot4 = distanceRKL_A1a_depot4 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A1b")) {
+						demandRKL_A1b_depot4++;
+						distanceRKL_A1b_depot4 = distanceRKL_A1b_depot4 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A2a")) {
+						demandRKL_A2a_depot4++;
+						distanceRKL_A2a_depot4 = distanceRKL_A2a_depot4 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A2b")) {
+						demandRKL_A2b_depot4++;
+						distanceRKL_A2b_depot4 = distanceRKL_A2b_depot4 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A3")) {
+						demandRKL_A3_depot4++;
+						distanceRKL_A3_depot4 = distanceRKL_A3_depot4 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A4")) {
+						demandRKL_A4_depot4++;
+						distanceRKL_A4_depot4 = distanceRKL_A4_depot4 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("B")) {
+						demandRKL_B_depot4++;
+						distanceRKL_B_depot4 = distanceRKL_B_depot4 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("C")) {
+						demandRKL_C_depot4++;
+						distanceRKL_C_depot4 = distanceRKL_C_depot4 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("P")) {
+						demandRKL_P_depot4++;
+						distanceRKL_P_depot4 = distanceRKL_P_depot4 + link.getLength();
+					}
+				}
+				if (link.getAttributes().getAttribute("vehicleDepot").equals("R5")) {
+
+					if (link.getAttributes().getAttribute("RKL").equals("A1a")) {
+						demandRKL_A1a_depot5++;
+						distanceRKL_A1a_depot5 = distanceRKL_A1a_depot5 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A1b")) {
+						demandRKL_A1b_depot5++;
+						distanceRKL_A1b_depot5 = distanceRKL_A1b_depot5 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A2a")) {
+						demandRKL_A2a_depot5++;
+						distanceRKL_A2a_depot5 = distanceRKL_A2a_depot5 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A2b")) {
+						demandRKL_A2b_depot5++;
+						distanceRKL_A2b_depot5 = distanceRKL_A2b_depot5 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A3")) {
+						demandRKL_A3_depot5++;
+						distanceRKL_A3_depot5 = distanceRKL_A3_depot5 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("A4")) {
+						demandRKL_A4_depot5++;
+						distanceRKL_A4_depot5 = distanceRKL_A4_depot5 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("B")) {
+						demandRKL_B_depot5++;
+						distanceRKL_B_depot5 = distanceRKL_B_depot5 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("C")) {
+						demandRKL_C_depot5++;
+						distanceRKL_C_depot5 = distanceRKL_C_depot5 + link.getLength();
+					} else if (link.getAttributes().getAttribute("RKL").equals("P")) {
+						demandRKL_P_depot5++;
+						distanceRKL_P_depot5 = distanceRKL_P_depot5 + link.getLength();
+					}
 				}
 			}
 		}
-		int assignedInput_depot1 = demandRKL_A1a_depot1 + demandRKL_A1b_depot1 + demandRKL_A2a_depot1
-				+ demandRKL_A2b_depot1 + demandRKL_A3_depot1 + demandRKL_A4_depot1 + demandRKL_B_depot1
-				+ demandRKL_C_depot1 + demandRKL_P_depot1;
-		System.out.println("Zugeordneter Input: " + assignedInput_depot1);
-		System.out.println("Gelesenen Input A1a: " + demandRKL_A1a_depot1);
-		System.out.println("Gelesenen Input A1b: " + demandRKL_A1b_depot1);
-		System.out.println("Gelesenen Input A2a: " + demandRKL_A2a_depot1);
-		System.out.println("Gelesenen Input A2b: " + demandRKL_A2b_depot1);
-		System.out.println("Gelesenen Input A3: " + demandRKL_A3_depot1);
-		System.out.println("Gelesenen Input A4: " + demandRKL_A4_depot1);
-		System.out.println("Gelesenen Input B: " + demandRKL_B_depot1);
-		System.out.println("Gelesenen Input C: " + demandRKL_C_depot1);
-		System.out.println("Gelesenen Input P: " + demandRKL_P_depot1);
-
 		try {
 			BufferedWriter writer;
 			File file;
@@ -116,8 +285,18 @@ public class AnalyzeDemand {
 			writer = new BufferedWriter(new FileWriter(file, true));
 			String now = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date());
 			writer.write("Analyse erstellt am: " + now + "\n\n");
-			
-			
+
+			writer.write("RKL\tAnzahl Links Hof 1\tStrecke Links" + "\n\n");
+			writer.write("A1a\t" + demandRKL_A1a_depot1 + "\t" + distanceRKL_A1a_depot1 / 1000 + "\t" + demandRKL_A1a_depot2 + "\t" + distanceRKL_A1a_depot2 / 1000 +"\t" + demandRKL_A1a_depot3 + "\t" + distanceRKL_A1a_depot3 / 1000+"\t" + demandRKL_A1a_depot4 + "\t" + distanceRKL_A1a_depot4 / 1000+"\t" + demandRKL_A1a_depot5 + "\t" + distanceRKL_A1a_depot5 / 1000+"\n");
+			writer.write("A1b\t" + demandRKL_A1b_depot1 + "\t" + distanceRKL_A1b_depot1 / 1000+ "\t" + demandRKL_A1b_depot2 + "\t" + distanceRKL_A1b_depot2 / 1000 +"\t" + demandRKL_A1b_depot3 + "\t" + distanceRKL_A1b_depot3 / 1000+"\t" + demandRKL_A1b_depot4 + "\t" + distanceRKL_A1b_depot4 / 1000+"\t" + demandRKL_A1b_depot5 + "\t" + distanceRKL_A1b_depot5 / 1000+"\n");
+			writer.write("A2a\t" + demandRKL_A2a_depot1 + "\t" + distanceRKL_A2a_depot1 / 1000 + "\t" + demandRKL_A2a_depot2 + "\t" + distanceRKL_A2a_depot2 / 1000 +"\t" + demandRKL_A2a_depot3 + "\t" + distanceRKL_A2a_depot3 / 1000+"\t" + demandRKL_A2a_depot4 + "\t" + distanceRKL_A2a_depot4 / 1000+"\t" + demandRKL_A2a_depot5 + "\t" + distanceRKL_A2a_depot5 / 1000+"\n");
+			writer.write("A2b\t" + demandRKL_A2b_depot1 + "\t" + distanceRKL_A2b_depot1 / 1000 + "\t" + demandRKL_A2b_depot2 + "\t" + distanceRKL_A2b_depot2 / 1000 +"\t" + demandRKL_A2b_depot3 + "\t" + distanceRKL_A2b_depot3 / 1000+"\t" + demandRKL_A2b_depot4 + "\t" + distanceRKL_A2b_depot4 / 1000+"\t" + demandRKL_A2b_depot5 + "\t" + distanceRKL_A2b_depot5 / 1000+"\n");
+			writer.write("A3\t" + demandRKL_A3_depot1 + "\t" + distanceRKL_A3_depot1 / 1000 + "\t" + demandRKL_A3_depot2 + "\t" + distanceRKL_A3_depot2 / 1000 +"\t" + demandRKL_A3_depot3 + "\t" + distanceRKL_A3_depot3 / 1000+"\t" + demandRKL_A3_depot4 + "\t" + distanceRKL_A3_depot4 / 1000+"\t" + demandRKL_A3_depot5 + "\t" + distanceRKL_A3_depot5 / 1000+"\n");
+			writer.write("A4\t" + demandRKL_A4_depot1 + "\t" + distanceRKL_A4_depot1 / 1000 + "\t" + demandRKL_A4_depot2 + "\t" + distanceRKL_A4_depot2 / 1000 +"\t" + demandRKL_A4_depot3 + "\t" + distanceRKL_A4_depot3 / 1000+"\t" + demandRKL_A4_depot4 + "\t" + distanceRKL_A4_depot4 / 1000+"\t" + demandRKL_A4_depot5 + "\t" + distanceRKL_A4_depot5 / 1000+"\n");
+			writer.write("B\t" + demandRKL_B_depot1 + "\t" + distanceRKL_B_depot1 / 1000 + "\t" + demandRKL_B_depot2 + "\t" + distanceRKL_B_depot2 / 1000 +"\t" + demandRKL_B_depot3 + "\t" + distanceRKL_B_depot3 / 1000+"\t" + demandRKL_B_depot4 + "\t" + distanceRKL_B_depot4 / 1000+"\t" + demandRKL_B_depot5 + "\t" + distanceRKL_B_depot5 / 1000+"\n");
+			writer.write("C\t" + demandRKL_C_depot1 + "\t" + distanceRKL_C_depot1 / 1000 + "\t" + demandRKL_C_depot2 + "\t" + distanceRKL_C_depot2 / 1000 +"\t" + demandRKL_C_depot3 + "\t" + distanceRKL_C_depot3 / 1000+"\t" + demandRKL_C_depot4 + "\t" + distanceRKL_C_depot4 / 1000+"\t" + demandRKL_C_depot5 + "\t" + distanceRKL_C_depot5 / 1000+"\n");
+			writer.write("P\t" + demandRKL_P_depot1 + "\t" + distanceRKL_P_depot1 / 1000 + "\t" + demandRKL_P_depot2 + "\t" + distanceRKL_P_depot2 / 1000 +"\t" + demandRKL_P_depot3 + "\t" + distanceRKL_P_depot3 / 1000+"\t" + demandRKL_P_depot4 + "\t" + distanceRKL_P_depot4 / 1000+"\t" + demandRKL_P_depot5 + "\t" + distanceRKL_P_depot5 / 1000+"\n");
+
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
