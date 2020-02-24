@@ -1,4 +1,4 @@
-package org.matsim.vsp.steetCleaning.prepare;
+package org.matsim.vsp.streetCleaning.prepare;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -35,6 +35,7 @@ public class ConnectNetworkwithStreetCleaningInformation {
 	private static final String areaOfBerlin = "scenarios/avscenario/shp/berlin.shp";
 
 	public static void main(String[] args) {
+		//TODO perheps no use of RKL P
 
 		log.setLevel(Level.INFO);
 
