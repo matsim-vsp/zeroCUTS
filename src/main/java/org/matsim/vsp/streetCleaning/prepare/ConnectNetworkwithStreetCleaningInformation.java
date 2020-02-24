@@ -54,7 +54,7 @@ public class ConnectNetworkwithStreetCleaningInformation {
 		// coordinate system and create a map with key Coord
 		HashMap<Coord, SimpleFeature> featureMap = new HashMap<Coord, SimpleFeature>();
 		for (SimpleFeature singleDemand : cleaningInput) {
-			if (singleDemand.getAttribute("RVZRKL").toString().isBlank() == false) {
+			if (singleDemand.getAttribute("RVZRKL").toString().isBlank() == false && singleDemand.getAttribute("RVRKL") != "P") {
 				MultiLineString weg = (MultiLineString) singleDemand.getDefaultGeometry();
 				LineString wegeteil = (LineString) weg.getGeometryN(0);
 
