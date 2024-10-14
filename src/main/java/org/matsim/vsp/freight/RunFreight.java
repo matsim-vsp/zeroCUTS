@@ -50,7 +50,7 @@ import org.matsim.freight.carriers.Carriers;
 import org.matsim.freight.carriers.ScheduledTour;
 import org.matsim.freight.carriers.Tour.ServiceActivity;
 import org.matsim.freight.carriers.Tour.TourElement;
-import org.matsim.freight.carriers.controler.CarrierControlerUtils;
+import org.matsim.freight.carriers.controler.CarrierControllerUtils;
 import org.matsim.freight.carriers.controler.CarrierModule;
 import org.matsim.freight.carriers.controler.CarrierScoringFunctionFactory;
 import org.matsim.freight.carriers.controler.CarrierStrategyManager;
@@ -70,8 +70,8 @@ import org.matsim.core.config.groups.ReplanningConfigGroup.StrategySettings;
 import org.matsim.core.config.groups.VspExperimentalConfigGroup;
 import org.matsim.core.config.groups.VspExperimentalConfigGroup.VspDefaultsCheckingLevel;
 import org.matsim.core.controler.AbstractModule;
-import org.matsim.core.controler.Controler;
-import org.matsim.core.controler.ControlerUtils;
+import org.matsim.core.controler.Controller;
+import org.matsim.core.controler.ControllerUtils;
 import org.matsim.core.controler.OutputDirectoryHierarchy;
 import org.matsim.core.controler.OutputDirectoryHierarchy.OverwriteFileSetting;
 import org.matsim.core.controler.OutputDirectoryLogging;
@@ -189,7 +189,7 @@ public class RunFreight {
 
 		config.vspExperimental().setVspDefaultsCheckingLevel(VspDefaultsCheckingLevel.warn);
 		config.addConfigConsistencyChecker(new VspConfigConsistencyCheckerImpl());
-		ControlerUtils.checkConfigConsistencyAndWriteToLog(config, "dump");
+		ControllerUtils.checkConfigConsistencyAndWriteToLog(config, "dump");
 
 		return config;
 	}  //End createConfig
@@ -312,7 +312,7 @@ public class RunFreight {
 	 * @param carriers
 	 */
 	//TODO: Auch für Shipments auslegen und umbenennen. KMT feb'19
-	//TODO: Funktionalität in contrib vorsehen -> CarrierControlerUtils? KMT feb'19
+	//TODO: Funktionalität in contrib vorsehen -> CarrierControllerUtils? KMT feb'19
 	private static void checkServiceAssignment(Carriers carriers) {
 		for (Carrier c :carriers.getCarriers().values()){
 			ArrayList<CarrierService> assignedServices = new ArrayList<>();
@@ -420,7 +420,7 @@ public class RunFreight {
 	//Benötigt, da listener kein "Null" als StrategyFactory mehr erlaubt, KT 17.04.2015
 	//Da keine Strategy notwendig, hier zunächst eine "leere" Factory
 	private static CarrierStrategyManager createMyStrategymanager() {
-		return CarrierControlerUtils.createDefaultCarrierStrategyManager();
+		return CarrierControllerUtils.createDefaultCarrierStrategyManager();
 	}
 
 
