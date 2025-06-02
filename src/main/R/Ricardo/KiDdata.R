@@ -28,6 +28,10 @@ filter_vehicleTypes <- c()
 
 filter_Gesamtgewicht <- c("all")
 
+bins <- c(0,30,60,90,120,180,240,300,360,420,480,540,600,720,840,Inf)
+bins <- c(0,10,20,30,40,50,60,75,90,105,120,150,180,240,300,420,540,660,780,900,Inf)
+bins <- c(0,60,120,180,240,300,360,420,480,540,600,660,720,780,840,Inf)
+
 filter_Gesamtgewicht <- c(0, 2800)                                        # vehTyp1
 createStopDurations(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszweig, filter_vehicleTypes, filter_verkehrsmodell, filter_Gesamtgewicht, bins)
 filter_Gesamtgewicht <- c(2800, 3500)                                     # vehTyp2
@@ -39,9 +43,7 @@ createStopDurations(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszweig, filter_v
 filter_Gesamtgewicht <- c(12000, 100000)                                  # vehTyp5
 createStopDurations(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszweig, filter_vehicleTypes, filter_verkehrsmodell, filter_Gesamtgewicht, bins)
 
-bins <- c(0,30,60,90,120,180,240,300,360,420,480,540,600,720,840,Inf)
-bins <- c(0,10,20,30,40,50,60,75,90,105,120,150,180,240,300,420,540,660,780,900,Inf)
-bins <- c(0,60,120,180,240,300,360,420,480,540,600,660,720,780,840,Inf)
+
 
 createTourStartDistribution(Fahrten, Fahrzeug, filter_Wirtschaftszweig, filter_vehicleTypes, filter_verkehrsmodell, filter_Gesamtgewicht, bins)
 createStopDurations(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszweig, filter_vehicleTypes, filter_verkehrsmodell, filter_Gesamtgewicht, bins)
