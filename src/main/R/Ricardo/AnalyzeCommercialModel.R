@@ -2,14 +2,24 @@
 library(ggplot2)
 library(dplyr)
 library(scales)
+library(tidyverse)
+library(lubridate)
+library(patchwork)
 
 
 # Datei einlesen – passe den Pfad ggf. an
 data <- read.csv2("C:/Users/erica/shared/matsim-metropole-ruhr/scenarios/metropole-ruhr-v2024.0/output/rvr/commercial_100pct/commercialTraffic_Run100pct/analysis/traffic/commercialTraffic_Run100pct.travelDistances_perVehicle.csv", stringsAsFactors = FALSE, fileEncoding = "UTF-8")
-
+data_fleet <- read.csv2("C:/Users/erica/shared/matsim-metropole-ruhr/scenarios/metropole-ruhr-v2024.0/output/rvr/commercial_1pct/smallScaleCommercial/analysis/freight/carrierFleetAnalysis.csv", stringsAsFactors = FALSE, fileEncoding = "UTF-8")
 # Numerische Spalten umwandeln
 data$distanceInKm <- as.numeric(data$distanceInKm)
 data$shareOfTravelDistanceWithDepotCharging <- as.numeric(data$shareOfTravelDistanceWithDepotCharging)
+
+
+data_fleet <- data_fleet %>%
+  mutate(
+    maxTourDuration = as.numeric(maxTourDuration)/ 60,  # in Minuten
+    usedForTour = tolower(usedForTour) == "true"  # als logisch
+  )
 
 # Fahrzeugtypen zusammenfassen
 data$vehicleType <- ifelse(data$vehicleType %in% c("truck40t", "heavy40t"),
@@ -303,3 +313,37 @@ plot4 <- ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
   theme(legend.position = "bottom")
 
 print(plot4)
+
+
+####Plots für Fleet Analysis
+# Konfigurierbare Bins (z. B. in 30-Minuten-Schritten bis 10h)
+duration_bins <- seq(0, 800, by = 30)
+
+data_fleet %>%
+  mutate(duration_bin = cut(maxTourDuration, breaks = duration_bins, include.lowest = TRUE)) %>%
+  count(duration_bin) %>%
+  mutate(percentage = n / sum(n) * 100) %>%
+  ggplot(aes(x = duration_bin, y = percentage)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Verteilung der maxTourDuration (alle Fahrzeuge)",
+    x = "maxTourDuration (Minuten, Bins)",
+    y = "Anteil (%)"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+data_fleet %>%
+  filter(usedForTour) %>%
+  mutate(duration_bin = cut(maxTourDuration, breaks = duration_bins, include.lowest = TRUE)) %>%
+  count(duration_bin) %>%
+  mutate(percentage = n / sum(n) * 100) %>%
+  ggplot(aes(x = duration_bin, y = percentage)) +
+  geom_col(fill = "forestgreen") +
+  labs(
+    title = "Verteilung der maxTourDuration (nur genutzte Fahrzeuge)",
+    x = "maxTourDuration (Minuten, Bins)",
+    y = "Anteil (%)"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
