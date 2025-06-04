@@ -47,7 +47,7 @@ createStopDurations(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszweig, filter_v
 
 createTourStartDistribution(Fahrten, Fahrzeug, filter_Wirtschaftszweig, filter_vehicleTypes, filter_verkehrsmodell, filter_Gesamtgewicht, bins)
 createStopDurations(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszweig, filter_vehicleTypes, filter_verkehrsmodell, filter_Gesamtgewicht, bins)
-createTourDurations(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszweig, filter_vehicleTypes, filter_verkehrsmodell, filter_Gesamtgewicht, bins)
+createTourDurationsAndDistances(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszweig, filter_vehicleTypes, filter_verkehrsmodell, filter_Gesamtgewicht, bins)
 
 ######################################           TourStartZeit            ##############################
 
@@ -214,7 +214,7 @@ createStopDurations <- function(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszwe
 
 ######################################           Tour-Dauern            ##############################
 
-createTourDurations <- function(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszweig, filter_vehicleTypes, filter_verkehrsmodell, filter_Gesamtgewicht, bins) {
+createTourDurationsAndDistances <- function(Ketten, Fahrzeug, Fahrten, filter_Wirtschaftszweig, filter_vehicleTypes, filter_verkehrsmodell, filter_Gesamtgewicht, bins) {
 
   #Filter Fahrzwecke. Wenn in Tour min. Fahrt den Zweck "1" Transport von Gütern hat, wird die Tour zum GoodsTransport gezählt
   fahrzeug_Fahrzweck <- data.frame(K00 = integer(0), F07a = integer(0))
