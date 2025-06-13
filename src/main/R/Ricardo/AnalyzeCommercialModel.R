@@ -176,7 +176,7 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
     aes(x = 1.1, y = Inf, label = label),
     inherit.aes = FALSE,
     hjust = 0, vjust = 2.2,
-    color = "red", size = 3.5
+    color = "red", size = 5.5
   ) +
   # 80%-Strich + Text
   geom_vline(xintercept = 0.8, color = "darkgreen", linetype = "dashed", size = 1) +
@@ -184,8 +184,8 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
     data = anteil80_alle,
     aes(x = 0.35, y = Inf, label = label),
     inherit.aes = FALSE,
-    hjust = 0, vjust = 3.2,
-    color = "darkgreen", size = 3.5
+    hjust = 0, vjust = 1.2,
+    color = "darkgreen", size = 5.5
   ) +
   scale_x_continuous(
     labels = scales::percent_format(accuracy = 1),
@@ -197,7 +197,14 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
     title = "Distance travelled in relation to the range of the BEV without recharging"
   ) +
   theme_minimal() +
-  theme(legend.position = "bottom")
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(size = 16, face = "bold"),        # Titelgröße
+    axis.title = element_text(size = 14),                       # Achsentitel
+    axis.text = element_text(size = 12),                        # Achsenbeschriftungen
+    legend.title = element_text(size = 13),                     # Legendentitel
+    legend.text = element_text(size = 12)                       # Legendentext
+  )
 
 # Plot 3: Verteilung der Depotladung nach Fahrzeugtyp
 ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
@@ -285,9 +292,15 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
   theme_minimal() +
   theme(
     plot.margin = margin(10, 40, 10, 10),
-    clip = "off"
-  )  +
-  theme(legend.position = "bottom")
+    clip = "off",
+    legend.position = "bottom",
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 13),
+    legend.text = element_text(size = 12),
+    strip.text = element_text(size = 13, face = "bold")  # Facet-Überschrift
+  )
 
 
 
