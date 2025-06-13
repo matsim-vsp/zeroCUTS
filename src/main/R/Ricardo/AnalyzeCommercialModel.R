@@ -38,16 +38,28 @@ data$vehicleType <- ifelse(data$vehicleType %in% c("waste_collection_diesel"),
                            "Abfallsammelfahrzeuge", data$vehicleType)
 data$vehicleType <- as.factor(data$vehicleType)
 
+# data$subpopulation <- ifelse(data$subpopulation %in% c("commercialPersonTraffic", "commercialPersonTraffic_service"),
+#                              "Personenwirtschaftsverkehr", data$subpopulation)
+# data$subpopulation <- ifelse(data$subpopulation %in% c("FTL_kv_trip", "FTL_trip"),
+#                                 "FTL", data$subpopulation)
+# data$subpopulation <- ifelse(data$subpopulation %in% c("goodsTraffic"),
+#                                 "Kleinräumiger Güterverkehr", data$subpopulation)
+# data$subpopulation <- ifelse(data$subpopulation %in% c("LTL_trip"),
+#                                 "LTL", data$subpopulation)
+# data$subpopulation <- ifelse(data$subpopulation %in% c("longDistanceFreight"),
+#                                 "Transit-Güterverkehr", data$subpopulation)
+# data$subpopulation <- as.factor(data$subpopulation)
+
 data$subpopulation <- ifelse(data$subpopulation %in% c("commercialPersonTraffic", "commercialPersonTraffic_service"),
-                             "Personenwirtschaftsverkehr", data$subpopulation)
+                             "Commercial Person traffic", data$subpopulation)
 data$subpopulation <- ifelse(data$subpopulation %in% c("FTL_kv_trip", "FTL_trip"),
-                                "FTL", data$subpopulation)
+                             "FTL", data$subpopulation)
 data$subpopulation <- ifelse(data$subpopulation %in% c("goodsTraffic"),
-                                "Kleinräumiger Güterverkehr", data$subpopulation)
+                             "Small-Scale-Freight-Traffic", data$subpopulation)
 data$subpopulation <- ifelse(data$subpopulation %in% c("LTL_trip"),
-                                "LTL", data$subpopulation)
+                             "LTL", data$subpopulation)
 data$subpopulation <- ifelse(data$subpopulation %in% c("longDistanceFreight"),
-                                "Transit-Güterverkehr", data$subpopulation)
+                             "Transit Freight Traffic", data$subpopulation)
 data$subpopulation <- as.factor(data$subpopulation)
 
 # Berechnung für gesamte Flotte
@@ -105,7 +117,7 @@ anteil80_alle <- data %>%
 # Hilfs-DataFrame für vertikale Linien
 linien_df <- data.frame(
   xintercept = c(0.8, 1.0),
-  label = c("Anteil der Fahrzeuge, für die 80% der Batterie ausreichen", "Anteil der Fahrzeuge, für die 100% der Batterie ausreichen")
+  label = c("Share of vehicles for which 80% of the battery is sufficient", "Share of vehicles for which 100% of the battery is sufficient")
 )
 
 ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
@@ -116,8 +128,8 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
   geom_vline(data = linien_df, aes(xintercept = xintercept, color = label),
              linetype = "dashed", size = 1, show.legend = TRUE) +
   scale_color_manual(
-    name = "Grenzwerte",
-    values = c("Anteil der Fahrzeuge, für die 80% der Batterie ausreichen" = "darkgreen", "Anteil der Fahrzeuge, für die 100% der Batterie ausreichen" = "red")
+    name = "Limit values",
+    values = c("Share of vehicles for which 80% of the battery is sufficient" = "darkgreen", "Share of vehicles for which 80% of the battery is sufficient" = "red")
   ) +
   geom_text(
     data = anteil_alle,
@@ -140,9 +152,9 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
     limits = c(0, 7)
   ) +
   labs(
-    x = "Anteil der genutzten Reichweitenkapazität",
-    y = "Dichte",
-    title = "Fahrstrecke im Verhältnis zur Reichweite des Elektrofahrzeugs ohne Nachladen"
+    x = "Share of utilised range capacity",
+    y = "Density",
+    title = "Distance travelled in relation to the range of the electric vehicle without recharging"
   ) +
   theme_minimal() +
   theme(legend.position = "bottom")
@@ -156,8 +168,8 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
   geom_vline(data = linien_df, aes(xintercept = xintercept, color = label),
              linetype = "dashed", size = 1, show.legend = TRUE) +
   scale_color_manual(
-    name = "Grenzwerte",
-    values = c("Anteil der Fahrzeuge, für die 80% der Batterie ausreichen" = "darkgreen", "Anteil der Fahrzeuge, für die 100% der Batterie ausreichen" = "red")
+    name = "Limit values",
+    values = c("Share of vehicles for which 80% of the battery is sufficient" = "darkgreen", "Share of vehicles for which 100% of the battery is sufficient" = "red")
   ) +
   geom_text(
     data = anteil_alle,
@@ -180,9 +192,9 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
     limits = c(0, 7)
   ) +
   labs(
-    x = "Anteil der genutzten Reichweitenkapazität",
-    y = "Dichte",
-    title = "Fahrstrecke im Verhältnis zur Reichweite des Elektrofahrzeugs ohne Nachladen"
+    x = "Share of used range capacity [%]",
+    y = "Density",
+    title = "Distance travelled in relation to the range of the BEV without recharging"
   ) +
   theme_minimal() +
   theme(legend.position = "bottom")
@@ -195,8 +207,8 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
   geom_vline(data = linien_df, aes(xintercept = xintercept, color = label),
              linetype = "dashed", size = 1, show.legend = TRUE) +
   scale_color_manual(
-    name = "Grenzwerte",
-    values = c("Anteil der Fahrzeuge, für die 80% der Batterie ausreichen" = "darkgreen", "Anteil der Fahrzeuge, für die 100% der Batterie ausreichen" = "red")
+    name = "Limit values",
+    values = c("Share of vehicles for which 80% of the battery is sufficient" = "darkgreen", "Share of vehicles for which 100% of the battery is sufficient" = "red")
   ) +
   # Annotation pro vehicleType (nach rechts versetzt)
   geom_text(
@@ -222,7 +234,7 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
   ) +
   labs(
     x = "Anteil der genutzten Reichweitenkapazität",
-    y = "Dichte",
+    y = "Density",
     title = "Fahrstrecke im Verhältnis zur Reichweite des Elektrofahrzeugs ohne Nachladen (Unterteilung nach Fahrzeugtyp)"
   ) +
   theme_minimal() +
@@ -240,8 +252,8 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
   geom_vline(data = linien_df, aes(xintercept = xintercept, color = label),
              linetype = "dashed", size = 1, show.legend = TRUE) +
   scale_color_manual(
-    name = "Grenzwerte",
-    values = c("Anteil der Fahrzeuge, für die 80% der Batterie ausreichen" = "darkgreen", "Anteil der Fahrzeuge, für die 100% der Batterie ausreichen" = "red")
+    name = "Limit values",
+    values = c("Share of vehicles for which 80% of the battery is sufficient" = "darkgreen", "Share of vehicles for which 100% of the battery is sufficient" = "red")
   ) +
   # Annotation pro vehicleType (nach rechts versetzt)
   geom_text(
@@ -266,9 +278,9 @@ ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
     limits = c(0, 5)
   ) +
   labs(
-    x = "Anteil der genutzten Reichweitenkapazität",
-    y = "Dichte",
-    title = "Fahrstrecke im Verhältnis zur Reichweite des Elektrofahrzeugs ohne Nachladen (Unterteilung nach Modell-Typ)"
+    x = "Share of utilised range capacity",
+    y = "Denity",
+    title = "Distance travelled in relation to the range of the BEV without recharging (by model type)"
   ) +
   theme_minimal() +
   theme(
@@ -288,8 +300,8 @@ plot4 <- ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
   geom_vline(data = linien_df, aes(xintercept = xintercept, color = label),
              linetype = "dashed", size = 1, show.legend = TRUE) +
   scale_color_manual(
-    name = "Grenzwerte",
-    values = c("Anteil der Fahrzeuge, für die 80% der Batterie ausreichen" = "darkgreen", "Anteil der Fahrzeuge, für die 100% der Batterie ausreichen" = "red")
+    name = "Limit values",
+    values = c("Share of vehicles for which 80% of the battery is sufficient" = "darkgreen", "Share of vehicles for which 100% of the battery is sufficient" = "red")
   ) +
   # Text bei 80 %
   geom_text(data = anteil80_df,
