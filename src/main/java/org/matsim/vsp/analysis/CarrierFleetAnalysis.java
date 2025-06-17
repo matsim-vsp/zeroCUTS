@@ -16,9 +16,9 @@ import java.nio.file.Path;
  */
 public class CarrierFleetAnalysis {
     public static void main(String[] args) throws IOException {
-
-        String carriersFile = "../matsim-metropole-ruhr/scenarios/metropole-ruhr-v2024.0/output/rvr/commercial_100pct/smallScaleCommercial/metropole-ruhr-v2024.0-3pct.output_carriers_withPlans.xml"; // Specify the path to your carriers file
-        String vehicleTypesFile = "../matsim-metropole-ruhr/scenarios/metropole-ruhr-v2024.0/output/rvr/commercial_100pct/smallScaleCommercial/metropole-ruhr-v2024.0-3pct.output_carriersVehicleTypes.xml.gz"; // Specify the path to your vehicle types file
+        String runFolder = "../matsim-metropole-ruhr/scenarios/metropole-ruhr-v2024.0/output/rvr/commercial_10pct_0.005_reduceHighDensityBy50pct/smallScaleCommercial/"; // Specify the path to your run folder
+        String carriersFile = runFolder + "metropole-ruhr-v2024.0-3pct.output_carriers_withPlans.xml"; // Specify the path to your carriers file
+        String vehicleTypesFile =  runFolder + "metropole-ruhr-v2024.0-3pct.output_carriersVehicleTypes.xml.gz"; // Specify the path to your vehicle types file
 
         Config config = ConfigUtils.createConfig();
         FreightCarriersConfigGroup freightCarriersConfigGroup = ConfigUtils.addOrGetModule(config, FreightCarriersConfigGroup.class);
