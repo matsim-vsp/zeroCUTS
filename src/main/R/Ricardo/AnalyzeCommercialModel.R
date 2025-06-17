@@ -9,7 +9,9 @@ library(patchwork)
 
 # Datei einlesen – passe den Pfad ggf. an
 data <- read.csv2("C:/Users/erica/shared/matsim-metropole-ruhr/scenarios/metropole-ruhr-v2024.0/output/rvr/commercial_100pct/commercialTraffic_Run100pct/analysis/traffic/commercialTraffic_Run100pct.travelDistances_perVehicle.csv", stringsAsFactors = FALSE, fileEncoding = "UTF-8")
-data_fleet <- read.csv2("C:/Users/erica/shared/matsim-metropole-ruhr/scenarios/metropole-ruhr-v2024.0/output/rvr/commercial_1pct/smallScaleCommercial/analysis/freight/carrierFleetAnalysis.csv", stringsAsFactors = FALSE, fileEncoding = "UTF-8")
+
+runFolderName <- "commercial_10pct_0.005"
+data_fleet <- read.csv2(paste0("C:/Users/erica/shared/matsim-metropole-ruhr/scenarios/metropole-ruhr-v2024.0/output/rvr/", runFolderName, "/smallScaleCommercial/analysis/freight/carrierFleetAnalysis.csv"), stringsAsFactors = FALSE, fileEncoding = "UTF-8")
 # Numerische Spalten umwandeln
 data$distanceInKm <- as.numeric(data$distanceInKm)
 data$shareOfTravelDistanceWithDepotCharging <- as.numeric(data$shareOfTravelDistanceWithDepotCharging)
@@ -351,7 +353,7 @@ data_fleet %>%
   ggplot(aes(x = duration_bin, y = percentage)) +
   geom_col(fill = "steelblue") +
   labs(
-    title = "Verteilung der maxTourDuration (alle Fahrzeuge)",
+    title = paste("Verteilung der maxTourDuration (alle Fahrzeuge) (Run:", runFolderName, ")"),
     x = "maxTourDuration (Minuten, Bins)",
     y = "Anteil (%)"
   ) +
@@ -366,7 +368,7 @@ data_fleet %>%
   ggplot(aes(x = duration_bin, y = percentage)) +
   geom_col(fill = "forestgreen") +
   labs(
-    title = "Verteilung der maxTourDuration (nur genutzte Fahrzeuge)",
+    title = paste("Verteilung der maxTourDuration (nur genutzte Fahrzeuge) (Run:", runFolderName, ")"),
     x = "maxTourDuration (Minuten, Bins)",
     y = "Anteil (%)"
   ) +
