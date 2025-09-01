@@ -20,7 +20,6 @@
 package org.matsim.vsp.freightDemandGeneration;
 
 import org.matsim.commercialDemandGenerationBasic.BasicCommercialDemandGeneration;
-
 import java.io.IOException;
 import java.nio.file.Path;
 
