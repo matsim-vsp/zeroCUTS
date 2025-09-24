@@ -166,6 +166,8 @@ public class RunFoodEmissions2024 {
 //    eConfig.setHbefaRoadTypeSource(HbefaRoadTypeSource.fromLinkAttributes);
         eConfig.setNonScenarioVehicles(NonScenarioVehicles.ignore);
 
+        eConfig.setHbefaConsistencyChecker(EmissionsConfigGroup.UseHbefaConsistencyChecker.skip);
+
 
         final String eventsFile = runDirectory + "/output_events.xml.gz";
 
