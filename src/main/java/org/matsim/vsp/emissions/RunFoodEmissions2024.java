@@ -26,6 +26,7 @@ import org.matsim.core.events.EventsUtils;
 import org.matsim.core.events.MatsimEventsReader;
 import org.matsim.core.events.algorithms.EventWriterXML;
 import org.matsim.core.scenario.ScenarioUtils;
+import org.matsim.simwrapper.SimWrapperModule;
 import org.matsim.vehicles.EngineInformation;
 import org.matsim.vehicles.VehicleType;
 import org.matsim.vehicles.VehicleUtils;
@@ -151,17 +152,12 @@ public class RunFoodEmissions2024 {
         config.global().setNumberOfThreads(1);
 
         EmissionsConfigGroup eConfig = ConfigUtils.addOrGetModule(config, EmissionsConfigGroup.class);
-        eConfig.setDetailedVsAverageLookupBehavior(
-                DetailedVsAverageLookupBehavior.tryDetailedThenTechnologyAverageElseAbort);
-        eConfig.setHbefaTableConsistencyCheckingLevel(
-                HbefaTableConsistencyCheckingLevel.none);  //KMT: Vielleicht nicht die beste Einstellung, aber das ist eine andere Baustelle ;)
+        eConfig.setDetailedVsAverageLookupBehavior(DetailedVsAverageLookupBehavior.tryDetailedThenTechnologyAverageElseAbort);
+        eConfig.setHbefaTableConsistencyCheckingLevel(HbefaTableConsistencyCheckingLevel.none);  //KMT: Vielleicht nicht die beste Einstellung, aber das ist eine andere Baustelle ;)
 //		eConfig.setAverageColdEmissionFactorsFile("https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/22823adc0ee6a0e231f35ae897f7b224a86f3a7a.enc"); //scheint nicht ganz die richtige Tabelle zu sein
-        eConfig.setAverageColdEmissionFactorsFile(
-                "https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/r9230ru2n209r30u2fn0c9rn20n2rujkhkjhoewt84202.enc"); //daher nun ausnahmsweise doch mal als lokale Kopie, damit wir weiter kommen.
-        eConfig.setDetailedColdEmissionFactorsFile(
-                "https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/82t7b02rc0rji2kmsahfwp933u2rfjlkhfpi2u9r20.enc");
-        eConfig.setAverageWarmEmissionFactorsFile(
-                "https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/7eff8f308633df1b8ac4d06d05180dd0c5fdf577.enc");
+        eConfig.setAverageColdEmissionFactorsFile("https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/r9230ru2n209r30u2fn0c9rn20n2rujkhkjhoewt84202.enc"); //daher nun ausnahmsweise doch mal als lokale Kopie, damit wir weiter kommen.
+        eConfig.setDetailedColdEmissionFactorsFile("https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/82t7b02rc0rji2kmsahfwp933u2rfjlkhfpi2u9r20.enc");
+        eConfig.setAverageWarmEmissionFactorsFile("https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/7eff8f308633df1b8ac4d06d05180dd0c5fdf577.enc");
 
         //TODO: In verschlüsselte Dateien integrieren und ins public SVN laden.
         // Dabei nochmal auf Spalten achten. mMn ist hier emConcept und Technology verdreht -.-
@@ -173,8 +169,7 @@ public class RunFoodEmissions2024 {
 
         final String eventsFile = runDirectory + "/output_events.xml.gz";
 
-        final String emissionEventOutputFile =
-                analysisOutputDirectory + "emission.events.offline2.xml";
+        final String emissionEventOutputFile = analysisOutputDirectory + "emission.events.offline2.xml";
         final String linkEmissionAnalysisFile = analysisOutputDirectory  + "emissionsPerLink.csv";
         final String linkEmissionPerMAnalysisFile = analysisOutputDirectory + "emissionsPerLinkPerM.csv";
 //    final String vehicleTypeFile = analysisOutputDirectory  + "emissionVehicleInformation.csv";
@@ -553,6 +548,7 @@ public class RunFoodEmissions2024 {
                 bind( Scenario.class ).toInstance( scenario );
                 bind( EventsManager.class ).toInstance( eventsManager );
                 bind( EmissionModule.class ) ;
+                bind (SimWrapperModule.class);
             }
         };
 
