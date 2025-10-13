@@ -110,27 +110,36 @@ public class RunFoodEmissions2024 {
 //        "costsVariation_mixedFleet_withDC_5000it/Food_fuel3.2_energy0.24/"
 //    )   ;
 
+
         //LSP Studien
-//        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Carriers_NWC\\";
-//        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE\\";
-//        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE_splitted\\";
-//        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE_splitted_8t\\";
-//        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Lsp\\";
-//        final String pathToRunDir = "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Safety_4285_ReRun\\";
-        final String pathToRunDir = "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285\\";
-//        final String pathToRunDir = "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285_ReRun\\";
-        // Holt alle direkten Unterordner von pathToRunDir
-        File baseDir = new File(pathToRunDir);
-        String[] listOfRuns = baseDir.list((current, name) -> new File(current, name).isDirectory());
 
-        etruckDefinition= EtruckDefinition.ownVehicleType;
+        //Weil im Nachfolgenden immer nur eine Unterebene abgefragt wird, sind hier die verschiedenen Oberebenen zu definieren:
+        var listPathToRuns = List.of(
+//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_NWC\\",
+            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE\\",
+            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE_splitted\\",
+            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE_splitted_8t\\",
+            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Lsp\\"//,
+//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Safety_4285_ReRun\\",
+//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285\\",
+//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285_ReRun\\"
+        );
 
-        if (args.length == 0) {
-            for (String runDir : listOfRuns) {
-                new RunFoodEmissions2024(pathToRunDir + runDir).run();
+
+        for (String pathToRunDir : listPathToRuns) {
+            // Holt alle direkten Unterordner von pathToRunDir
+            File baseDir = new File(pathToRunDir);
+            String[] listOfRuns = baseDir.list((current, name) -> new File(current, name).isDirectory());
+
+            etruckDefinition= EtruckDefinition.ownVehicleType;
+
+            if (args.length == 0) {
+                for (String runDir : listOfRuns) {
+                    new RunFoodEmissions2024(pathToRunDir + runDir).run();
+                }
+            } else {
+                new RunFoodEmissions2024(args[0]).run();
             }
-        } else {
-            new RunFoodEmissions2024(args[0]).run();
         }
     }
 
