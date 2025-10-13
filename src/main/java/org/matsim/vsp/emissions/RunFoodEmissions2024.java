@@ -111,7 +111,14 @@ public class RunFoodEmissions2024 {
 //    )   ;
 
         //LSP Studien
-        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Carriers_NWC\\";
+//        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Carriers_NWC\\";
+//        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE\\";
+//        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE_splitted\\";
+//        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE_splitted_8t\\";
+//        final String pathToRunDir = "C:\\git-and-svn\\tubcloud\\kturner\\Arbeit\\50 ClusterRuns KMT\\LSP_Food\\output\\runLSP_Base\\Lsp\\";
+//        final String pathToRunDir = "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Safety_4285_ReRun\\";
+        final String pathToRunDir = "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285\\";
+//        final String pathToRunDir = "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285_ReRun\\";
         // Holt alle direkten Unterordner von pathToRunDir
         File baseDir = new File(pathToRunDir);
         String[] listOfRuns = baseDir.list((current, name) -> new File(current, name).isDirectory());
@@ -158,11 +165,12 @@ public class RunFoodEmissions2024 {
         eConfig.setAverageColdEmissionFactorsFile("https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/r9230ru2n209r30u2fn0c9rn20n2rujkhkjhoewt84202.enc"); //daher nun ausnahmsweise doch mal als lokale Kopie, damit wir weiter kommen.
         eConfig.setDetailedColdEmissionFactorsFile("https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/82t7b02rc0rji2kmsahfwp933u2rfjlkhfpi2u9r20.enc");
         eConfig.setAverageWarmEmissionFactorsFile("https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/7eff8f308633df1b8ac4d06d05180dd0c5fdf577.enc");
+        eConfig.setDetailedWarmEmissionFactorsFile("https://svn.vsp.tu-berlin.de/repos/public-svn/3507bb3997e5657ab9da76dbedbb13c9b5991d3e/0e73947443d68f95202b71a156b337f7f71604ae/944637571c833ddcf1d0dfcccb59838509f397e6.enc");
 
         //TODO: In verschlüsselte Dateien integrieren und ins public SVN laden.
         // Dabei nochmal auf Spalten achten bzgl. emConcept und Technology -.-
         // Tabelle mit Endung2 hat die Spalten verdreht (altes (vor Sommer 2025 setting)
-        eConfig.setDetailedWarmEmissionFactorsFile("original-input-data/HBEFA_summarized_final.csv");
+//        eConfig.setDetailedWarmEmissionFactorsFile("original-input-data/HBEFA_summarized_final.csv");
 //    eConfig.setHbefaRoadTypeSource(HbefaRoadTypeSource.fromLinkAttributes);
         eConfig.setNonScenarioVehicles(NonScenarioVehicles.ignore);
 
