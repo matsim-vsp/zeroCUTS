@@ -122,44 +122,44 @@ linien_df <- data.frame(
   label = c("Share of vehicles for which 80% of the battery is sufficient", "Share of vehicles for which 100% of the battery is sufficient")
 )
 
-ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
-  geom_density(fill = "skyblue", alpha = 0.4) +
-  geom_rug(sides = "b", alpha = 0.5) +
-  # 100%-Strich + Text
-  geom_vline(xintercept = 1.0, color = "red", linetype = "dashed", size = 1) +
-  geom_vline(data = linien_df, aes(xintercept = xintercept, color = label),
-             linetype = "dashed", size = 1, show.legend = TRUE) +
-  scale_color_manual(
-    name = "Limit values",
-    values = c("Share of vehicles for which 80% of the battery is sufficient" = "darkgreen", "Share of vehicles for which 80% of the battery is sufficient" = "red")
-  ) +
-  geom_text(
-    data = anteil_alle,
-    aes(x = 1.05, y = Inf, label = label),
-    inherit.aes = FALSE,
-    hjust = 0, vjust = 2.2,
-    color = "red", size = 3.5
-  ) +
-  # 80%-Strich + Text
-  geom_vline(xintercept = 0.8, color = "darkgreen", linetype = "dashed", size = 1) +
-  geom_text(
-    data = anteil80_alle,
-    aes(x = 0.35, y = Inf, label = label),
-    inherit.aes = FALSE,
-    hjust = 0, vjust = 3.2,
-    color = "darkgreen", size = 3.5
-  ) +
-  scale_x_continuous(
-    labels = scales::percent_format(accuracy = 1),
-    limits = c(0, 7)
-  ) +
-  labs(
-    x = "Share of utilised range capacity",
-    y = "Density",
-    title = "Distance travelled in relation to the range of the electric vehicle without recharging"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "bottom")
+# ggplot(data, aes(x = shareOfTravelDistanceWithDepotCharging)) +
+#   geom_density(fill = "skyblue", alpha = 0.4) +
+#   geom_rug(sides = "b", alpha = 0.5) +
+#   # 100%-Strich + Text
+#   geom_vline(xintercept = 1.0, color = "red", linetype = "dashed", size = 1) +
+#   geom_vline(data = linien_df, aes(xintercept = xintercept, color = label),
+#              linetype = "dashed", size = 1, show.legend = TRUE) +
+#   scale_color_manual(
+#     name = "Limit values",
+#     values = c("Share of vehicles for which 80% of the battery is sufficient" = "darkgreen", "Share of vehicles for which 80% of the battery is sufficient" = "red")
+#   ) +
+#   geom_text(
+#     data = anteil_alle,
+#     aes(x = 1.05, y = Inf, label = label),
+#     inherit.aes = FALSE,
+#     hjust = 0, vjust = 2.2,
+#     color = "red", size = 3.5
+#   ) +
+#   # 80%-Strich + Text
+#   geom_vline(xintercept = 0.8, color = "darkgreen", linetype = "dashed", size = 1) +
+#   geom_text(
+#     data = anteil80_alle,
+#     aes(x = 0.35, y = Inf, label = label),
+#     inherit.aes = FALSE,
+#     hjust = 0, vjust = 3.2,
+#     color = "darkgreen", size = 3.5
+#   ) +
+#   scale_x_continuous(
+#     labels = scales::percent_format(accuracy = 1),
+#     limits = c(0, 7)
+#   ) +
+#   labs(
+#     x = "Share of utilised range capacity",
+#     y = "Density",
+#     title = "Distance travelled in relation to the range of the electric vehicle without recharging"
+#   ) +
+#   theme_minimal() +
+#   theme(legend.position = "bottom")
 
 
 # Plot 2: Histogramm + Dichteverteilung
