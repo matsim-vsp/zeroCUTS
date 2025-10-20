@@ -21,7 +21,7 @@ ggplot(df, aes(x = Year, group = Vehicle)) +
   geom_line(aes(y = Range*scale_factor, linetype = "Range",
                 color = Vehicle), linewidth = 1.2, alpha = 0.9) +
   geom_point(aes(y = Range*scale_factor, color = Vehicle), size = 3, alpha = 0.9) +
-  scale_y_continuous("Vehicle costs (T€) (incl. battery)",
+  scale_y_continuous("Vehicle acquisition costs (T€) (incl. battery)",
                      labels = function(x) x/1000,
                      sec.axis = sec_axis(~./scale_factor, name = "Range (km)")
   ) +
@@ -37,7 +37,7 @@ ggplot(df, aes(x = Year, group = Vehicle)) +
 p_cost <- ggplot(df, aes(Year, Costs, color = Vehicle, group = Vehicle)) +
   geom_line(linewidth = 1.3) +
   geom_point(size = 3) +
-  labs(title = "Development of vehicle costs (incl. battery costs)", x = NULL, y = "T€") +
+  labs(title = "Development of vehicle acquisition costs (incl. battery costs)", x = NULL, y = "T€") +
   scale_color_brewer(palette = "Dark2") +
   scale_x_continuous(breaks = c(2019, 2024)) +
   scale_y_continuous(labels = function(x) x/1000) +
