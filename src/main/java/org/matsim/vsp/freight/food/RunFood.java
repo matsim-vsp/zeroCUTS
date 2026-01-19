@@ -200,6 +200,7 @@ class RunFood implements MATSimAppCommand {
 			}
 		});
 
+		controller.getInjector();
 		return controller;
 	}
 
