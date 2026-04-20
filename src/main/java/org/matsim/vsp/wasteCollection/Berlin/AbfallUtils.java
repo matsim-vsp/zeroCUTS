@@ -2,9 +2,8 @@ package org.matsim.vsp.wasteCollection.Berlin;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.graphhopper.jsprit.analysis.toolbox.Plotter;
 import com.graphhopper.jsprit.core.algorithm.VehicleRoutingAlgorithm;
-import com.graphhopper.jsprit.core.algorithm.box.SchrimpfFactory;
+import com.graphhopper.jsprit.core.algorithm.box.Jsprit;
 import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem;
 import com.graphhopper.jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import com.graphhopper.jsprit.core.util.Solutions;
@@ -582,7 +581,7 @@ class AbfallUtils {
 			VehicleRoutingProblem problem = vrpBuilder.build();
 
 			// get the algorithm out-of-the-box, search solution and get the best one.
-			VehicleRoutingAlgorithm algorithm = new SchrimpfFactory().createAlgorithm(problem);
+			VehicleRoutingAlgorithm algorithm = Jsprit.Builder.newInstance(problem).buildAlgorithm();
 			log.info("Creating solution for carrier " + carrierCount + " of " + (numberOfCarriers*carriers.getCarriers().size()) + " Carriers"); //WILL HAVE TO CHANGE THE NUMBER OF CARRIERS LOG IF I MAKE THE NUMBER OF CARRIERS VARIABLE
 			algorithm.setMaxIterations(jspritIterations = jspritIteration);
 			System.out.println("ANZAHL JSPRIT ITERATIONEN: " +  jspritIteration);

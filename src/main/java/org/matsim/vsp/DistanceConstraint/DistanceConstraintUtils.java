@@ -2,6 +2,7 @@ package org.matsim.vsp.DistanceConstraint;
 
 import java.util.Collection;
 
+import com.graphhopper.jsprit.core.algorithm.box.Jsprit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.matsim.api.core.v01.Id;
@@ -18,7 +19,6 @@ import org.matsim.vehicles.Vehicle;
 import org.matsim.vehicles.VehicleType;
 
 import com.graphhopper.jsprit.core.algorithm.VehicleRoutingAlgorithm;
-import com.graphhopper.jsprit.core.algorithm.box.SchrimpfFactory;
 import com.graphhopper.jsprit.core.algorithm.state.StateId;
 import com.graphhopper.jsprit.core.algorithm.state.StateManager;
 import com.graphhopper.jsprit.core.algorithm.state.StateUpdater;
@@ -107,7 +107,7 @@ class DistanceConstraintUtils {
 							.createRoutingProblemBuilder(oneShipmentCarrier, network);
 					vrpBuilder2.setRoutingCost(netBasedCostsMatrix);
 					VehicleRoutingProblem problem = vrpBuilder2.build();
-					VehicleRoutingAlgorithm algorithm = new SchrimpfFactory().createAlgorithm(problem);
+					VehicleRoutingAlgorithm algorithm = Jsprit.Builder.newInstance(problem).buildAlgorithm();
 					algorithm.setMaxIterations(25);
 					Collection<VehicleRoutingProblemSolution> solutions = algorithm.searchSolutions();
 					VehicleRoutingProblemSolution bestSolution = Solutions.bestOf(solutions);
