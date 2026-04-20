@@ -26,7 +26,7 @@
 
 		<main.class>org.matsim.vsp.wasteCollection.Berlin.Run_Abfall</main.class>
 
-		<maven.compiler.release>21</maven.compiler.release>
+		<maven.compiler.release>25</maven.compiler.release>
 	</properties>
 
 	<repositories>
