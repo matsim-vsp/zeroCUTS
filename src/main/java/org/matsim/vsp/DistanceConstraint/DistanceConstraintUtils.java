@@ -98,8 +98,8 @@ class DistanceConstraintUtils {
 						break;
 					}
 
-					CarrierService testService = CarrierService.Builder
-							.newInstance(Id.create("singleService", CarrierService.class), Id.createLinkId(to))
+					CarrierService testService = CarrierService.Builder.newInstance(Id.create("singleService", CarrierService.class),
+                                    Id.createLinkId(to))
 							.setServiceDuration(0).build();
 					CarriersUtils.addService(oneShipmentCarrier, testService);
 
@@ -120,9 +120,8 @@ class DistanceConstraintUtils {
 						distance = 0.0;
 
 						for (Tour.TourElement element : tour.getTour().getTourElements()) {
-							if (element instanceof Tour.Leg) {
-								Tour.Leg legElement = (Tour.Leg) element;
-								if (legElement.getRoute().getDistance() != 0 && legElement.getRoute() != null)
+							if (element instanceof Tour.Leg legElement) {
+                                if (legElement.getRoute().getDistance() != 0 && legElement.getRoute() != null)
 									distance = distance + RouteUtils.calcDistance((NetworkRoute) legElement.getRoute(),
 											0, 0, network);
 
