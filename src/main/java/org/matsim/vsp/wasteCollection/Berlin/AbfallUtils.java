@@ -2,6 +2,12 @@ package org.matsim.vsp.wasteCollection.Berlin;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.graphhopper.jsprit.analysis.toolbox.Plotter;
+import com.graphhopper.jsprit.core.algorithm.VehicleRoutingAlgorithm;
+import com.graphhopper.jsprit.core.algorithm.box.SchrimpfFactory;
+import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem;
+import com.graphhopper.jsprit.core.problem.solution.VehicleRoutingProblemSolution;
+import com.graphhopper.jsprit.core.util.Solutions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.Geometry;
@@ -27,6 +33,10 @@ import org.matsim.freight.carriers.Tour.Leg;
 import org.matsim.freight.carriers.Tour.Pickup;
 import org.matsim.freight.carriers.Tour.TourElement;
 import org.matsim.freight.carriers.controller.CarrierModule;
+import org.matsim.freight.carriers.jsprit.MatsimJspritFactory;
+import org.matsim.freight.carriers.jsprit.NetworkBasedTransportCosts;
+import org.matsim.freight.carriers.jsprit.NetworkBasedTransportCosts.Builder;
+import org.matsim.freight.carriers.jsprit.NetworkRouter;
 import org.matsim.vehicles.VehicleType;
 import org.geotools.api.feature.simple.SimpleFeature;
 import org.matsim.vehicles.VehicleUtils;
@@ -541,6 +551,75 @@ class AbfallUtils {
 			garbageGradestr = garbageGradestr + volumeGarbage;
 	}
 
+	/**
+	 * Solves with jsprit and gives a xml output of the plans and a plot of the
+	 * solution
+	 * 
+	 * @param
+	 */
+	static void solveWithJsprit(Scenario scenario, Carriers carriers, HashMap<String, Carrier> carrierMap,
+			int jspritIteration, int numberOfCarriers) { //ADDED NUMBER OF CARRIERS VARIABLE BECAUSE I STOPPED USING THE CARRIERMAP
+
+		int carrierCount = 1;
+		CarrierVehicleTypes vehicleTypes = (CarrierVehicleTypes) scenario.getScenarioElement("carrierVehicleTypes");
+		Network network = scenario.getNetwork();
+		Builder netBuilder = NetworkBasedTransportCosts.Builder.newInstance(network,
+				vehicleTypes.getVehicleTypes().values());
+		final NetworkBasedTransportCosts netBasedCosts = netBuilder.build();
+		netBuilder.setTimeSliceWidth(1800);
+
+		//I changed this to loop through the carriers and not the carriermap
+		for (Carrier singleCarrier : carriers.getCarriers().values()) {
+			if (singleCarrier.getShipments().isEmpty()) {
+				log.warn("Carrier " + singleCarrier.getId() + " has no shipments to collect!");
+				continue;
+			}
+			// Build jsprit, solve and route VRP for carrierService only -> need solution to
+			// convert Services to Shipments
+			VehicleRoutingProblem.Builder vrpBuilder = MatsimJspritFactory.createRoutingProblemBuilder(singleCarrier,
+					network);
+			vrpBuilder.setRoutingCost(netBasedCosts);
+			VehicleRoutingProblem problem = vrpBuilder.build();
+
+			// get the algorithm out-of-the-box, search solution and get the best one.
+			VehicleRoutingAlgorithm algorithm = new SchrimpfFactory().createAlgorithm(problem);
+			log.info("Creating solution for carrier " + carrierCount + " of " + (numberOfCarriers*carriers.getCarriers().size()) + " Carriers"); //WILL HAVE TO CHANGE THE NUMBER OF CARRIERS LOG IF I MAKE THE NUMBER OF CARRIERS VARIABLE
+			algorithm.setMaxIterations(jspritIterations = jspritIteration);
+			System.out.println("ANZAHL JSPRIT ITERATIONEN: " +  jspritIteration);
+			Collection<VehicleRoutingProblemSolution> solutions = algorithm.searchSolutions();
+			VehicleRoutingProblemSolution bestSolution = Solutions.bestOf(solutions);
+			costsJsprit = costsJsprit + bestSolution.getCost();
+
+			// Routing bestPlan to Network
+			CarrierPlan carrierPlanServices = MatsimJspritFactory.createPlan(bestSolution);
+			NetworkRouter.routePlan(carrierPlanServices, netBasedCosts);
+			singleCarrier.getPlans().add(carrierPlanServices);
+			singleCarrier.setSelectedPlan(carrierPlanServices);
+			noPickup = noPickup + bestSolution.getUnassignedJobs().size();
+			carrierCount++;
+//			if (singleCarrier.getId() == Id.create("Carrier_Chessboard", Carrier.class))
+//				new Plotter(problem, bestSolution).plot(
+//						scenario.getConfig().controller().getOutputDirectory() + "/jsprit_CarrierPlans_Test01.png",
+//						"bestSolution");
+		}
+		new CarrierPlanWriter(carriers)
+				.write(scenario.getConfig().controller().getOutputDirectory() + "/jsprit_CarrierPlans.xml");
+
+	}
+
+//	/**
+//	 * @param
+//	 */
+//	static void scoringAndManagerFactory(Scenario scenario, final Controler controller) {
+//		controller.addOverridingModule(new CarrierModule());
+//		controller.addOverridingModule(new AbstractModule() {
+//			@Override
+//			public void install() {
+//				bind(CarrierScoringFunctionFactory.class).toInstance(createMyScoringFunction2(scenario));
+//				bind(CarrierPlanStrategyManagerFactory.class).toInstance(createMyStrategymanager());
+//			}
+//		});
+//	}
 	static Controler prepareController(Scenario scenario) {
 		Controler controller = new Controler(scenario);
 
