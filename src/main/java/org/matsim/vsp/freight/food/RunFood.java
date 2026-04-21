@@ -59,16 +59,16 @@ class RunFood implements MATSimAppCommand {
 
 	static final Logger log = LogManager.getLogger(RunFood.class);
 
-	@CommandLine.Option(names = "--carriersFilePath", description = "Path to the carriers file.", required = true, defaultValue = "../shared-svn/projects/freight/studies/WP51_EmissionsFood/input_2024/I-Base_carrierLEH_v2_withFleet_Shipment_OneTW_PickupTime.xml")
+	@CommandLine.Option(names = "--carriersFilePath", description = "Path to the carriers file.", required = true, defaultValue = "../shared-svn/projects/zerocuts/studies/2024_E_Food/input/I-Base_carrierLEH_v2_withFleet_Shipment_OneTW_PickupTime_ICEVandBEV_Test.xml")
 	private static Path carriersFilePath;
 
-	@CommandLine.Option(names = "--vehicleTypesFilePath", description = "Path to the vehicleTypes file.", required = true, defaultValue = "../shared-svn/projects/freight/studies/WP51_EmissionsFood/input_2024/vehicleTypes_Food_2024.xml")
+	@CommandLine.Option(names = "--vehicleTypesFilePath", description = "Path to the vehicleTypes file.", required = true, defaultValue = "../shared-svn/projects/zerocuts/studies/2024_E_Food/input/vehicleTypes_Food_2024.xml")
 	private static Path vehicleTypesFilePath;
 
 	@CommandLine.Option(names = "--nuOfJspritIteration", description = "Sets the number of jsprit iterations.", required = true, defaultValue = "1")
 	private static int nuOfJspritIteration;
 
-	@CommandLine.Option(names = "--networkChangeEventsFile", description = "Path to the networkChangeEvents file.", defaultValue = "../shared-svn/projects/freight/studies/WP51_EmissionsFood/input_2024/networkChangeEvents_Berlin_V6.0-10pct.xml.gz")
+	@CommandLine.Option(names = "--networkChangeEventsFile", description = "Path to the networkChangeEvents file.", defaultValue = "../shared-svn/projects/zerocuts/studies/2024_E_Food/input/networkChangeEvents_Berlin_V6.0-10pct.xml.gz")
 	private static String networkChangeEventsFileLocation;
 
 	@CommandLine.Option(names = "--outputLocation", description = "Path to the output location.", required = true, defaultValue = "../shared-svn/projects/freight/studies/WP51_EmissionsFood/input_2024/test/output")
