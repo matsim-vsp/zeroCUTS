@@ -27,6 +27,8 @@ import org.matsim.api.core.v01.events.Event;
 import org.matsim.api.core.v01.population.Activity;
 import org.matsim.api.core.v01.population.Leg;
 import org.matsim.application.MATSimAppCommand;
+import org.matsim.core.config.groups.ControllerConfigGroup;
+import org.matsim.core.controler.OutputDirectoryLogging;
 import org.matsim.freight.carriers.FreightCarriersConfigGroup;
 import org.matsim.freight.carriers.Carrier;
 import org.matsim.freight.carriers.CarriersUtils;
@@ -96,6 +98,10 @@ class RunFood implements MATSimAppCommand {
 
 //		calculateVariableConsumptionCosts = true;
 
+		if (calculateVariableConsumptionCosts) {
+			outputLocation = outputLocation + "_fuel" + fuelCosts_EUR_per_l + "_energy" + energyCosts_EUR_per_kWh + "/";
+		}
+
 		Config config = prepareConfig();
 		Scenario scenario = prepareScenario(config);
 		Controler controler = prepareControler(scenario);
@@ -106,10 +112,7 @@ class RunFood implements MATSimAppCommand {
 			log.warn("Fuel costs: {} EUR per liter.", fuelCosts_EUR_per_l);
 			log.warn("Energy costs: {} EUR per kWh.", energyCosts_EUR_per_kWh);
 			calculateVariableConsumptionCosts(scenario, fuelCosts_EUR_per_l, energyCosts_EUR_per_kWh);
-			outputLocation = outputLocation + "_fuel" + fuelCosts_EUR_per_l + "_energy" + energyCosts_EUR_per_kWh + "/";
-			config.controller().setOutputDirectory(outputLocation);
 		}
-
 
 		CarriersUtils.runJsprit(scenario);
 
@@ -161,10 +164,14 @@ class RunFood implements MATSimAppCommand {
 		config.controller().setLastIteration(0);
 		config.controller().setOutputDirectory(outputLocation);
 
+		OutputDirectoryLogging.initLogging(new OutputDirectoryHierarchy(config));
+		config.controller().setOverwriteFileSetting(OutputDirectoryHierarchy.OverwriteFileSetting.overwriteExistingFiles);
+		config.controller().setCompressionType(ControllerConfigGroup.CompressionType.gzip);
+
 		config.network().setInputFile(networkPath);
 
 		if (networkChangeEventsFileLocation == null || networkChangeEventsFileLocation.isEmpty()){
-			log.info("Setting networkChangeEventsInput file: " + networkChangeEventsFileLocation);
+            log.info("Setting networkChangeEventsInput file: {}", networkChangeEventsFileLocation);
 			config.network().setTimeVariantNetwork(true);
 			config.network().setChangeEventsInputFile(networkChangeEventsFileLocation);
 		}
