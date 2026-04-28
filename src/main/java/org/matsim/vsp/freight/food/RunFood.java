@@ -170,7 +170,7 @@ class RunFood implements MATSimAppCommand {
 
 		config.network().setInputFile(networkPath);
 
-		if (networkChangeEventsFileLocation == null || networkChangeEventsFileLocation.isEmpty()){
+		if (networkChangeEventsFileLocation != null){
             log.info("Setting networkChangeEventsInput file: {}", networkChangeEventsFileLocation);
 			config.network().setTimeVariantNetwork(true);
 			config.network().setChangeEventsInputFile(networkChangeEventsFileLocation);
