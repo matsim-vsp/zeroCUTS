@@ -26,7 +26,7 @@ public class RunFreightAnalysisForMultipleRuns {
             File analysisFolder = new File(singleRunFolder, "CarriersAnalysis");
             if (!analysisFolder.exists() || reRunAllAnalysis) {
                 CarriersAnalysis freightAnalysis = new CarriersAnalysis(singleRunFolder.getPath());
-                freightAnalysis.runCarrierAnalysis(CarriersAnalysis.CarrierAnalysisType.carriersAndEvents);
+                freightAnalysis.runCarrierAnalysis(CarriersAnalysis.CarrierAnalysisType.carriersStatsAndDetailedTourAnalysisBasedOnEvents);
             }
         }
 

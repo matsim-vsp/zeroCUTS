@@ -27,7 +27,7 @@ public class RunAnalyse {
 		switch (slectedFreightAnalysisVersion) {
 			case eventBased -> {
 				CarriersAnalysis freightAnalysis = new CarriersAnalysis(runDir);
-				freightAnalysis.runCarrierAnalysis(CarriersAnalysis.CarrierAnalysisType.carriersAndEvents);
+				freightAnalysis.runCarrierAnalysis(CarriersAnalysis.CarrierAnalysisType.carriersStatsAndDetailedTourAnalysisBasedOnEvents);
 			}
 			case oldVersion -> {
 				if (runId != null)

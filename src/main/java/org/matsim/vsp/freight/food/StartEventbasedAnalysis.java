@@ -31,6 +31,6 @@ public class StartEventbasedAnalysis {
 		}
         log.info("Running analysis for: {}", simOutputPath);
 		CarriersAnalysis freightAnalysis = new CarriersAnalysis(simOutputPath);
-		freightAnalysis.runCarrierAnalysis(CarriersAnalysis.CarrierAnalysisType.carriersAndEvents);
+		freightAnalysis.runCarrierAnalysis(CarriersAnalysis.CarrierAnalysisType.carriersStatsAndDetailedTourAnalysisBasedOnEvents);
 	}
 }
