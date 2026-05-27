@@ -114,17 +114,25 @@ public class RunFoodEmissions2024 {
         //LSP Studien
 
         //Weil im Nachfolgenden immer nur eine Unterebene abgefragt wird, sind hier die verschiedenen Oberebenen zu definieren:
+//        var listPathToRuns = List.of(
+////            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_NWC\\",
+//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE\\",
+//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE_splitted\\",
+//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE_splitted_8t\\",
+//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Lsp\\"//,
+////            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Safety_4285_ReRun\\",
+////            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285\\",
+////            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285_ReRun\\"
+//        );
+        final String pathToRunDirectory = "C:/Users/mart_k0/Documents/95 Promotion/Runs/LSP_Food/";
         var listPathToRuns = List.of(
-//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_NWC\\",
-            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE\\",
-            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE_splitted\\",
-            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Carriers_noNwcE_splitted_8t\\",
-            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Base\\Lsp\\"//,
-//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_Safety_4285_ReRun\\",
-//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285\\",
-//            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285_ReRun\\"
+                pathToRunDirectory + "runLSP_Base/Lsp/81_twoChains500it_ICEV_Edeka/",
+                pathToRunDirectory + "runLSP_ZEZ_4285_ReRun/91_ZEZ_twoChains500it_ICEV_Edeka/",
+                pathToRunDirectory + "runLSP_Safety_4285_ReRun/183_Safety_twoChains500it_mixFleet_Edeka/",
+                pathToRunDirectory + "runLSP_Base/Lsp/81_twoChains500it_ICEV_Kaufland/",
+                pathToRunDirectory + "runLSP_ZEZ_4285_ReRun/91_ZEZ_twoChains500it_ICEV_Kaufland/",
+                pathToRunDirectory + "runLSP_Safety_4285_ReRun/283_Safety_twoChains500it_mixFleet_Kaufland/"
         );
-
 
         for (String pathToRunDir : listPathToRuns) {
             // Holt alle direkten Unterordner von pathToRunDir
