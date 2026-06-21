@@ -124,7 +124,7 @@ public class RunFoodEmissions2024 {
 ////            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285\\",
 ////            "C:\\Users\\mart_k0\\Documents\\95 Promotion\\Runs\\LSP_Food\\output\\runLSP_ZEZ_4285_ReRun\\"
 //        );
-        final String pathToRunDirectory = "C:/Users/mart_k0/Documents/95 Promotion/Runs/LSP_Food/";
+        final String pathToRunDirectory = "C:/Users/mart_k0/Documents/95 Promotion/Runs/LSP_Food/output/";
         var listPathToRuns = List.of(
                 pathToRunDirectory + "runLSP_Base/Lsp/81_twoChains500it_ICEV_Edeka/",
                 pathToRunDirectory + "runLSP_ZEZ_4285_ReRun/91_ZEZ_twoChains500it_ICEV_Edeka/",

@@ -44,26 +44,14 @@ public class RunEmissionEventsAnalysis2024 {
 //    )   ;
 
 
-        final String pathToRunDir = "../shared-svn/projects/freight/studies/UpdateEventsfromEarlierStudies/";
+        final String pathToRunDir = "C:/Users/mart_k0/Documents/95 Promotion/Runs/LSP_Food/";
     var listOfRuns = List.of(
-        "foodRetailing_wo_rangeConstraint/71_ICEVBEV_NwCE_BVWP_10000it_DCoff_noTax/",
-        "foodRetailing_wo_rangeConstraint/71a_ICEV_NwCE_BVWP_10000it_DCoff_noTax/",
-        "foodRetailing_wo_rangeConstraint/72_ICEVBEV_NwCE_BVWP_10000it_DCoff_Tax25/",
-        "foodRetailing_wo_rangeConstraint/73_ICEVBEV_NwCE_BVWP_10000it_DCoff_Tax50/",
-        "foodRetailing_wo_rangeConstraint/74_ICEVBEV_NwCE_BVWP_10000it_DCoff_Tax100/",
-        "foodRetailing_wo_rangeConstraint/75_ICEVBEV_NwCE_BVWP_10000it_DCoff_Tax150/",
-        "foodRetailing_wo_rangeConstraint/76_ICEVBEV_NwCE_BVWP_10000it_DCoff_Tax200/",
-        "foodRetailing_wo_rangeConstraint/77_ICEVBEV_NwCE_BVWP_10000it_DCoff_Tax250/",
-        "foodRetailing_wo_rangeConstraint/78_ICEVBEV_NwCE_BVWP_10000it_DCoff_Tax300/",
-        //nun Runs mit ReichweitenConstraint
-        "foodRetailing_with_rangeConstraint/21_ICEVBEV_NwCE_BVWP_10000it_DC_noTax/",
-        "foodRetailing_with_rangeConstraint/22_ICEVBEV_NwCE_BVWP_10000it_DC_Tax25/",
-        "foodRetailing_with_rangeConstraint/23_ICEVBEV_NwCE_BVWP_10000it_DC_Tax50/",
-        "foodRetailing_with_rangeConstraint/24_ICEVBEV_NwCE_BVWP_10000it_DC_Tax100/",
-        "foodRetailing_with_rangeConstraint/25_ICEVBEV_NwCE_BVWP_10000it_DC_Tax150/",
-        "foodRetailing_with_rangeConstraint/26_ICEVBEV_NwCE_BVWP_10000it_DC_Tax200/",
-        "foodRetailing_with_rangeConstraint/27_ICEVBEV_NwCE_BVWP_10000it_DC_Tax250/",
-        "foodRetailing_with_rangeConstraint/28_ICEVBEV_NwCE_BVWP_10000it_DC_Tax300/"
+            "runLSP_Base\\Lsp\\81_twoChains500it_ICEV_Edeka/",
+            "runLSP_ZEZ_4285_ReRun\\91_ZEZ_twoChains500it_ICEV_Edeka/",
+            "runLSP_Safety_4285_ReRun\\183_Safety_twoChains500it_mixFleet_Edeka/",
+            "runLSP_Base\\Lsp\\81_twoChains500it_ICEV_Kaufland/",
+            "runLSP_ZEZ_4285_ReRun\\91_ZEZ_twoChains500it_ICEV_Kaufland/",
+            "runLSP_Safety_4285_ReRun\\283_Safety_twoChains500it_mixFleet_Kaufland/"
     )   ;
 
 
