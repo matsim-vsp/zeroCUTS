@@ -11,7 +11,7 @@
 # - für die Strommixe anpassen als eigene cases.
 
 
-setwd("C:/git-and-svn/tubcloud/kturner/Arbeit/50 ClusterRuns KMT/LSPBase/output/runLSP_Base/Carriers")
+setwd("C:/Users/mart_k0/Documents/95 Promotion/Runs/LSP_Food/output/Chapter11/Kaufland")
 
 
 # Install and load necessary packages
@@ -110,6 +110,10 @@ auswertung <- auswertung %>%mutate(
 ) %>%
   arrange(carrierId, caseNum) %>% #Sortiert nach Carrier und caseNum
   select(-caseNum)   # Hilfsspalte wieder entfernen
+
+auswertung_perCase <- auswertung %>%
+  group_by(case) %>%
+  summarise(across(where(is.numeric), sum, na.rm = TRUE), .groups = 'drop')
 
 ### alle Nummern in \num{} einpacken
 numify <- function(df) {
