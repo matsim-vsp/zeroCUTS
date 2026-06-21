@@ -4,13 +4,11 @@
 ####TODOS
 # - Prüfen, dass das Umwandlung in Tabelle für LaTex gut klappt, ggf. Infos anpassen
 # - ggf. Rundung der Werte
-# -aufs Jahr hochrechnen???
-
 
 
 # #setwd("C:/git-and-svn/shared-svn/projects/freight/studies/UpdateEventsfromEarlierStudies/foodRetailing_wo_rangeConstraint/71_ICEVBEV_NwCE_BVWP_10000it_DCoff_noTax/analysis")
 # EFood <- FALSE
-setwd("C:/git-and-svn/shared-svn/projects/freight/studies/UpdateEventsfromEarlierStudies/foodRetailing_with_rangeConstraint/")
+setwd("C:/Users/mart_k0/Documents/95 Promotion/Runs/LSP_Food/output/Chapter11/Kaufland")
 EFood <- FALSE
 
 
@@ -37,7 +35,7 @@ pollutants2WriteNonExhaust <- c("Scenario", "PM_non_exhaust", "PM2_5_non_exhaust
 main_dir <- getwd()
 
 # Pfad zum spezifischen Referenzordner
-referenz_ordner <- "C:/git-and-svn/shared-svn/projects/freight/studies/UpdateEventsfromEarlierStudies/foodRetailing_wo_rangeConstraint/71a_ICEV_NwCE_BVWP_10000it_DCoff_noTax/"
+referenz_ordner <- "C:/Users/mart_k0/Documents/95 Promotion/Runs/LSP_Food/output/Chapter11/Kaufland/MATSim0_jsprit1000_Kaufland"
 
 # Liste der Unterordner im Hauptverzeichnis
 subdirs <- list.dirs(main_dir, full.names = TRUE, recursive = FALSE)
@@ -102,7 +100,8 @@ kombinierte_daten <- kombinierte_daten[, c("ScenarioLang", setdiff(names(kombini
 kombinierte_daten$Scenario <- ifelse(
   kombinierte_daten$ScenarioLang == basename(referenz_ordner), 
   "Base Case", 
-  sub(".*_", "", kombinierte_daten$ScenarioLang)  # Extrahiert den Teil nach dem letzten Unterstrich
+#  sub(".*_", "", kombinierte_daten$ScenarioLang)  # Extrahiert den Teil nach dem letzten Unterstrich
+  kombinierte_daten$ScenarioLang
 )
 
 # Bringe die Spalte "Scenario" an die zweite Stelle
@@ -167,4 +166,37 @@ kombinierte_daten_kg[numerische_spalten] <- kombinierte_daten_kg[numerische_spal
 
 write_output("Emissions_kg.csv", calcRelChanges(kombinierte_daten_kg))
 #head(kombinierte_daten_kg)
+
+
+### Jahresumrechnung: multipliziere die kombinierten Daten mit 250 und gebe die Werte in kg aus
+# Annahme: die Originaldaten sind in Gramm (g). Zuerst mit 250 multiplizieren (Hochrechnung),
+# dann in kg umrechnen und ausgeben.
+kombinierte_daten_annual <- kombinierte_daten
+numerische_spalten <- sapply(kombinierte_daten_annual, is.numeric)
+# Multipliziere alle numerischen Spalten mit 250
+kombinierte_daten_annual[numerische_spalten] <- kombinierte_daten_annual[numerische_spalten] * 250
+
+# Nun in kg umrechnen (g -> kg)
+kombinierte_daten_annual_kg <- kombinierte_daten_annual
+kombinierte_daten_annual_kg[numerische_spalten] <- kombinierte_daten_annual_kg[numerische_spalten] / 1000
+
+# Schreibe die annualisierten Emissionen in kg (berechnet relative Änderungen wie zuvor)
+write_output("Emissions_annual_kg.csv", calcRelChanges(kombinierte_daten_annual_kg))
+
+
+### Jahresumrechnung: multipliziere die kombinierten Daten mit 250 und gebe die Werte in kg aus
+# Annahme: die Originaldaten sind in Gramm (g). Zuerst mit 250 multiplizieren (Hochrechnung),
+# dann in kg umrechnen und ausgeben.
+kombinierte_daten_annual <- kombinierte_daten
+numerische_spalten <- sapply(kombinierte_daten_annual, is.numeric)
+# Multipliziere alle numerischen Spalten mit 250
+kombinierte_daten_annual[numerische_spalten] <- kombinierte_daten_annual[numerische_spalten] * 250
+
+# Nun in kg umrechnen (g -> kg)
+kombinierte_daten_annual_t <- kombinierte_daten_annual
+kombinierte_daten_annual_t[numerische_spalten] <- kombinierte_daten_annual_t[numerische_spalten] / 1000000
+
+# Schreibe die annualisierten Emissionen in kg (berechnet relative Änderungen wie zuvor)
+write_output("Emissions_annual_t.csv", calcRelChanges(kombinierte_daten_annual_t))
+
 
