@@ -61,9 +61,11 @@ p <- ggplot(data_long, aes(x = Auftragsgroesse)) +
   theme_minimal() +
   theme(
     strip.background = element_rect(fill = "lightgray"),
-    strip.text = element_text(size = 12, face = "bold"),
-    axis.text = element_text(size = 12),
-    axis.title = element_text(size = 13)
+    strip.text = element_text(size = 18, face = "bold"),
+    axis.text = element_text(size = 18),
+    axis.title = element_text(size = 20),
+    plot.title = element_text(size = 20),
+    plot.subtitle = element_text(size = 18)
   )
 
 # Output-Verzeichnis erstellen falls nicht vorhanden
@@ -76,6 +78,42 @@ if (!dir.exists(output_dir)) {
 ggsave(output_file, plot = p, width = 12, height = 8, dpi = 150)
 
 cat("Plot gespeichert unter:", output_file, "\n")
+
+# --- Zweiter Plot: Separate Plots für Kaufland und Edeka mit allen Varianten ---
+output_file2 <- file.path("output", "kmt", "job_distribution_by_partner.png")
+
+p2 <- ggplot(data_long, aes(x = Auftragsgroesse, fill = Variante)) +
+  geom_histogram(
+    aes(y = after_stat(count)),
+    bins = 15,
+    color = "black",
+    alpha = 0.7,
+    position = "identity"
+  ) +
+  facet_wrap(~ Handelspartner, scales = "free_y") +
+  labs(
+    title = "Frequency Distribution of Job Sizes by Partner",
+    subtitle = "Job Splitting - Kaufland and Edeka",
+    x = "Job Size",
+    y = "Frequency",
+    fill = "Variant"
+  ) +
+  scale_fill_manual(values = c("original" = "steelblue", "18t" = "darkorange", "8t" = "forestgreen")) +
+  theme_minimal() +
+  theme(
+    strip.background = element_rect(fill = "lightgray"),
+    strip.text = element_text(size = 18, face = "bold"),
+    axis.text = element_text(size = 18),
+    axis.title = element_text(size = 20),
+    plot.title = element_text(size = 20),
+    plot.subtitle = element_text(size = 18),
+    legend.text = element_text(size = 16),
+    legend.title = element_text(size = 18)
+  )
+
+ggsave(output_file2, plot = p2, width = 14, height = 7, dpi = 150)
+
+cat("Plot gespeichert unter:", output_file2, "\n")
 
 # Auch als Konsolen-Ausgabe der Verteilungen
 cat("\nVerteilungsstatistik:\n")
