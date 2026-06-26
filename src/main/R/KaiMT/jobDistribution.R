@@ -88,15 +88,15 @@ p2 <- ggplot(data_long, aes(x = Auftragsgroesse, fill = Variante)) +
     bins = 15,
     color = "black",
     alpha = 0.7,
-    position = "identity"
+    position = "dodge"
   ) +
   facet_wrap(~ Handelspartner, scales = "free_y") +
   labs(
-    title = "Frequency Distribution of Job Sizes by Partner",
+    title = "Frequency Distribution of Job Sizes",
     subtitle = "Job Splitting - Kaufland and Edeka",
     x = "Job Size",
     y = "Frequency",
-    fill = "Variant"
+    fill = "max. GVWR"
   ) +
   scale_fill_manual(values = c("original" = "steelblue", "18t" = "darkorange", "8t" = "forestgreen")) +
   theme_minimal() +
