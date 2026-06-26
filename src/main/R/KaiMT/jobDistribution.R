@@ -38,8 +38,9 @@ data_long$Auftragsgroesse <- as.numeric(data_long$Auftragsgroesse)
 data_long <- data_long %>%
   separate(Handelspartner_Variante, into = c("Handelspartner", "Variante"), sep = "_")
 
-# Reihenfolge festlegen: original, 18t, 8t
-data_long$Variante <- factor(data_long$Variante, levels = c("original", "18t", "8t"))
+# Reihenfolge festlegen: original, 18t, 8t (als 7.5t label)
+data_long$Variante <- factor(data_long$Variante, levels = c("original", "18t", "8t"),
+                             labels = c("original", "18t", "7.5t"))
 data_long$Handelspartner <- factor(data_long$Handelspartner, levels = c("Kaufland", "Edeka"))
 
 # Plot erstellen: Kaufland oben, Edeka unten; links nach rechts: original, 18t, 8t
@@ -98,7 +99,7 @@ p2 <- ggplot(data_long, aes(x = Auftragsgroesse, fill = Variante)) +
     y = "Frequency",
     fill = "max. GVWR"
   ) +
-  scale_fill_manual(values = c("original" = "steelblue", "18t" = "darkorange", "8t" = "forestgreen")) +
+  scale_fill_manual(values = c("original" = "steelblue", "18t" = "darkorange", "7.5t" = "forestgreen")) +
   theme_minimal() +
   theme(
     strip.background = element_rect(fill = "lightgray"),
