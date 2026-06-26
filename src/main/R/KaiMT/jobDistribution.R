@@ -26,7 +26,7 @@ colnames(data) <- c("Kaufland_original", "Kaufland_18t", "Kaufland_8t",
 data_long <- data %>%
   pivot_longer(
     cols = everything(),
-    names_to = "Kategorie",
+    names_to = "Handelspartner_Variante",
     values_to = "Auftragsgroesse"
   ) %>%
   filter(!is.na(Auftragsgroesse) & Auftragsgroesse != "")
@@ -34,7 +34,15 @@ data_long <- data %>%
 # Auftragsgroesse in numerisch umwandeln
 data_long$Auftragsgroesse <- as.numeric(data_long$Auftragsgroesse)
 
-# Plot erstellen
+# Handelspartner und Variante aufteilen
+data_long <- data_long %>%
+  separate(Handelspartner_Variante, into = c("Handelspartner", "Variante"), sep = "_")
+
+# Reihenfolge festlegen: original, 18t, 8t
+data_long$Variante <- factor(data_long$Variante, levels = c("original", "18t", "8t"))
+data_long$Handelspartner <- factor(data_long$Handelspartner, levels = c("Kaufland", "Edeka"))
+
+# Plot erstellen: Kaufland oben, Edeka unten; links nach rechts: original, 18t, 8t
 p <- ggplot(data_long, aes(x = Auftragsgroesse)) +
   geom_histogram(
     aes(y = after_stat(count)),
@@ -43,18 +51,19 @@ p <- ggplot(data_long, aes(x = Auftragsgroesse)) +
     color = "black",
     alpha = 0.7
   ) +
-  facet_wrap(~ Kategorie, scales = "free_y") +
+  facet_grid(Handelspartner ~ Variante, scales = "free_y") +
   labs(
-    title = "Häufigkeitsverteilung der Auftragsgrößen",
-    subtitle = "2-Echelon Job Splitting - Kaufland und Edeka",
-    x = "Auftragsgröße",
-    y = "Häufigkeit"
+    title = "Frequency Distribution of Job Sizes",
+    subtitle = "Job Splitting - Kaufland and Edeka",
+    x = "Job Size",
+    y = "Frequency"
   ) +
   theme_minimal() +
   theme(
     strip.background = element_rect(fill = "lightgray"),
-    strip.text = element_text(size = 10, face = "bold"),
-    axis.text = element_text(size = 9)
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 13)
   )
 
 # Output-Verzeichnis erstellen falls nicht vorhanden
@@ -71,7 +80,7 @@ cat("Plot gespeichert unter:", output_file, "\n")
 # Auch als Konsolen-Ausgabe der Verteilungen
 cat("\nVerteilungsstatistik:\n")
 print(data_long %>%
-        group_by(Kategorie) %>%
+        group_by(Handelspartner, Variante) %>%
         summarise(
           n = sum(!is.na(Auftragsgroesse)),
           min = min(Auftragsgroesse, na.rm = TRUE),
