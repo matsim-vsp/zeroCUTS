@@ -1,0 +1,16 @@
+Policy,Case,Costs (€),Vehicles (#),Distance (km),Travel Time (h),Fuel (l),CO2 (ton)
+Base,s,114575,529,38146,706.8,11170,29.3
+Base,m,71263,184,37072,686.4,11254,29.5
+Base,diff,-43313,-345,-1704,-20.4,+84,+0.2
+(A1) Cordon toll 20EUR on heavy ICEV,s,117391,532,39614,732.5,11612,30.4
+(A1) Cordon toll 20EUR on heavy ICEV,m,75120,192,38682,718.9,11721,30.7
+(A1) Cordon toll 20EUR on heavy ICEV,diff,-42271,-340,-932,-13.6,+109,+0.3
+(A2) Cordon toll - BEV available,s,117345,534,39683,733.4,10229,26.8
+(A2) Cordon toll - BEV available,m,74637,196,39051,720.4,10470,27.4
+(A2) Cordon toll - BEV available,diff,-42708,-338,-632,-13.0,+241,+0.6
+(B) No ICEV in cordon - BEV available,s,119552,542,40707,753.7,9951,26.1
+(B) No ICEV in cordon - BEV available,m,76842,203,39907,741.3,10328,27.1
+(B) No ICEV in cordon - BEV available,diff,-42710,-339,-800,-12.4,+377,+1.0
+(C) UCC,s,140891,731,41805,791.7,10401,27.3
+(C) UCC,m,79083,232,40036,744.7,10715,28.1
+(C) UCC,diff,-61808,-499,-1769,-47.1,+314,+0.8
