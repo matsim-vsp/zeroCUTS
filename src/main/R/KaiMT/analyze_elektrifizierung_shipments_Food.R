@@ -2,6 +2,14 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
+####
+# Erster Aufschlag. Nicht getestet, weil den Plot doch noch gefunden
+# Geht um Plots der Veränderung multiple tours (shipments) vs singel tours (Services)
+# sowohl gegeneinander, als auch jeweils in dem entsprechenden Setup die Policies vs Base-Case
+# KMT Jul 26
+###
+
+
 # Load data
 data <- read.csv("berlin_food_scenario.csv")
 
