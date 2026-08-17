@@ -126,28 +126,23 @@ public class RunFoodEmissions2024 {
 //        );
         final String pathToRunDirectory = "C:/Users/mart_k0/Documents/95 Promotion/Runs/LSP_Food/output/";
         var listPathToRuns = List.of(
-                pathToRunDirectory + "runLSP_Base/Lsp/81_twoChains500it_ICEV_Edeka/",
-                pathToRunDirectory + "runLSP_ZEZ_4285_ReRun/91_ZEZ_twoChains500it_ICEV_Edeka/",
-                pathToRunDirectory + "runLSP_Safety_4285_ReRun/183_Safety_twoChains500it_mixFleet_Edeka/",
-                pathToRunDirectory + "runLSP_Base/Lsp/81_twoChains500it_ICEV_Kaufland/",
-                pathToRunDirectory + "runLSP_ZEZ_4285_ReRun/91_ZEZ_twoChains500it_ICEV_Kaufland/",
-                pathToRunDirectory + "runLSP_Safety_4285_ReRun/283_Safety_twoChains500it_mixFleet_Kaufland/"
+                pathToRunDirectory + "runLSP_ZEZ_4285_ReRun2026/93a_ZEZ_twoChains500it_mixFleet_Edeka/",
+                pathToRunDirectory + "runLSP_Safety_4285_ReRun2026/183a_Safety_twoChains500it_mixFleet_Edeka/",
+                pathToRunDirectory + "runLSP_ZEZ_4285_ReRun2026/93b_ZEZ_twoChains500it_mixFleet_Edeka/",
+                pathToRunDirectory + "runLSP_Safety_4285_ReRun2026/183b_Safety_twoChains500it_mixFleet_Edeka/",
+                pathToRunDirectory + "runLSP_ZEZ_4285_ReRun2026/93a_ZEZ_twoChains500it_mixFleet_Kaufland/",
+                pathToRunDirectory + "runLSP_Safety_4285_ReRun2026/283a_Safety_twoChains500it_mixFleet_Kaufland/",
+                pathToRunDirectory + "runLSP_ZEZ_4285_ReRun2026/93b_ZEZ_twoChains500it_mixFleet_Kaufland/",
+                pathToRunDirectory + "runLSP_Safety_4285_ReRun2026/283b_Safety_twoChains500it_mixFleet_Kaufland/"
         );
 
-        for (String pathToRunDir : listPathToRuns) {
+        for (String runDirectory : listPathToRuns) {
             // Holt alle direkten Unterordner von pathToRunDir
-            File baseDir = new File(pathToRunDir);
-            String[] listOfRuns = baseDir.list((current, name) -> new File(current, name).isDirectory());
 
             etruckDefinition= EtruckDefinition.ownVehicleType;
 
-            if (args.length == 0) {
-                for (String runDir : listOfRuns) {
-                    new RunFoodEmissions2024(pathToRunDir + runDir).run();
-                }
-            } else {
-                new RunFoodEmissions2024(args[0]).run();
-            }
+            RunFoodEmissions2024 analysis = new RunFoodEmissions2024(runDirectory);
+            analysis.run();
         }
     }
 
