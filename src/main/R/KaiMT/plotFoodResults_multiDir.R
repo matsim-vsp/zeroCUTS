@@ -164,14 +164,30 @@ for (subdir in subdirs) {
           box = list(visible = T),
           points = "all", jitter = 0.5, pointpos = -1.5) %>%
           layout(
-            xaxis = list(title = 'Vehicle Type'),
-            yaxis = list(title = 'Tour Distance (km)',  range = list(-45.,max_y_km)),
+            # ---------- X‑Achse ----------
+            xaxis = list(
+              title = list(
+                text = "Vehicle Type",            # Achsentitel‑Text
+                font = list(size = 24)           # Größe des Titels (≈ 2 × 12)
+              ),
+              tickfont = list(size = 20)        # Größe der Tick‑Labels (etwas kleiner als Titel)
+            ),
+
+            # ---------- Y‑Achse ----------
+            yaxis = list(
+              title = list(
+                text = "Tour Distance (km)",
+                font = list(size = 24)
+              ),
+              tickfont = list(size = 20),
+              range = list(-45.,max_y_km)
+            ),
             #Aktuell noch ziemlich hässliche Farbpalette, aber sie Funktioniert, dass alle Diesel Rot und alle E-Fzg Grün sind.
             #colorway = c("red", "green","red", "green","red", "green","red", "green"),
             #colorway = colorsAna,
             colorway = colorsKMT8,
             showlegend = FALSE,
-            title = basename(subdir)
+            title = ""
           )
 
         # # Display the plots separately
@@ -227,11 +243,11 @@ for (i in seq_len(nrow(all_plots_DistViolin))) {
 }
 
 
-# Kombiniere die plotly-Plots zu einem einzigen Subplot
-combined_plot <- subplot(all_plots_DistViolin$plot, nrows = length(all_plots_DistViolin$plot) %/% 2 + length(all_plots_DistViolin$plot) %% 2, shareX = TRUE, shareY = TRUE)
-
-# Zeige den kombinierten Plot an
-combined_plot
+# # Kombiniere die plotly-Plots zu einem einzigen Subplot
+# combined_plot <- subplot(all_plots_DistViolin$plot, nrows = length(all_plots_DistViolin$plot) %/% 2 + length(all_plots_DistViolin$plot) %% 2, shareX = TRUE, shareY = TRUE)
+#
+# # Zeige den kombinierten Plot an
+# combined_plot
 
 
 # ###ggplot###
